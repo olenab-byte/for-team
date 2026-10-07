@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<style>:root{box-sizing:border-box}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Who We Build Warmy For</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: Warmy DS v1 look — top pill nav, centered hero, persona cards row, persona-switched journey grid. Warm cream canvas, charcoal ink, Figtree, pill controls, colored dots. */
+:root{
+  --bg:oklch(0.985 0.007 85); --surface:oklch(1 0 0); --beige:oklch(0.955 0.013 80); --line:oklch(0.91 0.014 80);
+  --ink:oklch(0.21 0.02 265); --muted:oklch(0.3 0.03 60); --on-ink:oklch(1 0 0);
+  --sky:oklch(0.76 0.11 230); --mint:oklch(0.74 0.12 165); --pink:oklch(0.77 0.12 355); --amber:oklch(0.8 0.12 75);
+  --good:oklch(0.52 0.11 160); --good-soft:oklch(0.95 0.04 160); --bad:oklch(0.55 0.17 15); --violet:oklch(0.52 0.19 295);
+  --font:"Figtree",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:oklch(0.17 0.012 265); --surface:oklch(0.215 0.014 265); --beige:oklch(0.27 0.014 265); --line:oklch(0.31 0.014 265);
+  --ink:oklch(0.96 0.01 85); --muted:oklch(0.88 0.015 80); --on-ink:oklch(0.17 0.012 265);
+  --good:oklch(0.8 0.12 160); --good-soft:oklch(0.3 0.05 160); --bad:oklch(0.76 0.14 15); --violet:oklch(0.78 0.13 295); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:oklch(0.17 0.012 265); --surface:oklch(0.215 0.014 265); --beige:oklch(0.27 0.014 265); --line:oklch(0.31 0.014 265);
+  --ink:oklch(0.96 0.01 85); --muted:oklch(0.88 0.015 80); --on-ink:oklch(0.17 0.012 265);
+  --good:oklch(0.8 0.12 160); --good-soft:oklch(0.3 0.05 160); --bad:oklch(0.76 0.14 15); --violet:oklch(0.78 0.13 295); color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.55}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in oklch,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:1200px;margin:0 auto;padding-inline:16px;padding-block:8px;display:flex;align-items:center;gap:4px}
+.nav a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;white-space:nowrap}
+.nav a:hover{color:var(--ink)}
+.nav a.on{background:var(--beige);color:var(--ink)}
+.nav .sp{flex:1}
+.icon-btn{width:34px;height:34px;border-radius:999px;border:0;background:transparent;display:grid;place-items:center;color:var(--muted)}
+.icon-btn:hover{background:var(--beige);color:var(--ink)}
+.icon-btn svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+.wrap{max-width:1200px;margin:0 auto;padding-inline:clamp(16px,4vw,40px)}
+
+/* hero */
+.hero{text-align:center;padding-block:72px 56px;display:flex;flex-direction:column;align-items:center;gap:18px}
+.badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:4px 12px;font-size:12.5px;color:var(--muted)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--muted);flex:none}
+h1{margin:0;font-size:clamp(30px,4.6vw,46px);font-weight:700;letter-spacing:-.025em;line-height:1.12;max-width:20ch;text-wrap:balance}
+.lead{margin:0;color:var(--muted);font-size:16px;max-width:58ch;text-wrap:pretty}
+.btns{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:6px}
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:9px 18px;font-size:14px;font-weight:600;text-decoration:none;border:1px solid transparent}
+.btn.primary{background:var(--ink);color:var(--on-ink)}
+.btn.secondary{background:var(--beige);color:var(--ink);border-color:var(--line)}
+.btn:hover{filter:brightness(1.06)}
+.status{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:13px;color:var(--muted);background:var(--surface)}
+.status[data-s="saved"] .dot{background:var(--good)} .status[data-s="saving"] .dot{background:var(--sky)} .status[data-s="error"] .dot{background:var(--bad)}
+.status[data-s="error"]{color:var(--bad)}
+
+/* section heads */
+.sec{padding-block:40px}
+.sec-h{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px;margin-bottom:22px}
+.sec-h h2{margin:0;font-size:24px;font-weight:700;letter-spacing:-.015em}
+.sec-h p{margin:4px 0 0;color:var(--muted);max-width:62ch}
+
+/* personas */
+.personas{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:start}
+@media (max-width:1100px){.personas{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.personas{grid-template-columns:minmax(0,1fr)}}
+.pcard{padding:16px}
+.pcard{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:14px;font-weight:600;background:var(--surface);max-width:100%}
+.pill .n{color:var(--muted);font-variant-numeric:tabular-nums;font-weight:500}
+.pill input{all:unset;min-width:4ch;width:100%;font:inherit;color:inherit}
+.pcard>.pill{width:100%;flex-wrap:wrap;row-gap:6px;border-radius:18px}
+.pcard>.pill input{flex:1 1 9ch;width:auto}
+.field.goal-f{border-radius:12px;padding:8px 10px 6px;margin:0 -10px;border:1px solid transparent}
+.field.goal-f textarea{margin:0;width:100%;padding:2px 0;border:0;background:transparent!important}
+.field.one-off{--ic:var(--bad)} .field.long-term{--ic:var(--violet)}
+.field.one-off,.field.long-term{background:color-mix(in oklch,var(--ic) 9%,var(--surface));border-color:color-mix(in oklch,var(--ic) 35%,var(--line))}
+.field.one-off label,.field.long-term label{color:var(--ic)}
+.field.one-off textarea,.field.long-term textarea{color:color-mix(in oklch,var(--ic) 70%,var(--ink));font-weight:600}
+.goal-row{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.intent{display:inline-flex;align-items:center;border-radius:999px;padding:2px 10px;font-size:11.5px;font-weight:700;color:var(--surface);background:var(--ic,var(--muted))}
+.intent:empty{display:none}
+.legend-i{display:inline-flex;align-items:center;gap:6px;font-weight:600}
+.legend-i .dot{width:8px;height:8px}
+.users{flex:none;display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;font-variant-numeric:tabular-nums;background:var(--beige);color:var(--muted);border-radius:999px;padding:2px 9px;white-space:nowrap;cursor:help}
+.users b{color:var(--ink);font-weight:700}
+.pill:focus-within{border-color:var(--ink)}
+.field{display:flex;flex-direction:column;gap:2px}
+.field label{font-size:12.5px;font-weight:600;color:var(--muted)}
+textarea{font:inherit;color:inherit;background:transparent;border:1px solid transparent;border-radius:10px;padding:6px 8px;margin:0 -8px;resize:none;overflow:hidden;width:calc(100% + 16px);line-height:1.5;min-height:34px;font-size:14.5px}
+textarea::placeholder{color:var(--muted);opacity:.8}
+textarea:hover:not(:disabled){background:var(--beige)}
+textarea:focus{outline:none;border-color:var(--line);background:var(--bg)}
+textarea:disabled{cursor:default}
+.addp{border:1.5px dashed var(--line);background:transparent;border-radius:20px;min-height:140px;color:var(--muted);font-weight:600}
+.addp:hover{border-color:var(--ink);color:var(--ink)}
+.empty{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px;color:var(--muted);max-width:60ch}
+.skel{height:300px;border-radius:20px;background:var(--beige)}
+
+/* journey */
+.tabs{display:inline-flex;flex-wrap:wrap;gap:2px;padding:4px;background:var(--beige);border:1px solid var(--line);border-radius:22px;max-width:100%}
+.tab{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;padding:7px 14px;border-radius:999px;border:0;background:transparent;color:var(--muted);white-space:nowrap}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px color-mix(in oklch,var(--ink) 10%,transparent),0 0 0 1px var(--line)}
+.tab .nm{font-weight:600}
+.t-intent{font-size:11.5px;font-weight:700;border-radius:999px;padding:1px 8px;color:color-mix(in oklch,var(--ic) 75%,var(--ink));background:color-mix(in oklch,var(--ic) 13%,transparent)}
+.t-intent.one-off{--ic:var(--bad)} .t-intent.long-term{--ic:var(--violet)}
+.t-intent:empty{display:none}
+.t-paid{font-size:12px;font-weight:500;font-variant-numeric:tabular-nums;color:var(--muted)}
+.t-paid b{font-weight:700;color:inherit}
+.tab[aria-selected="true"] .t-paid{color:var(--ink)}
+.t-paid::after{content:"*";opacity:.6;margin-left:1px}
+.board{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px}
+.scroller{overflow-x:auto;margin:-4px;padding:4px}
+.grid{display:grid;grid-template-columns:140px repeat(4,minmax(190px,1fr));gap:12px;min-width:920px}
+.stage{display:flex;flex-direction:column;gap:6px;position:relative;padding-bottom:4px}
+.stage .pill{align-self:flex-start;font-size:13.5px;padding:4px 12px}
+.stage small{color:var(--muted);font-size:12.5px;line-height:1.4}
+.stage:not(:last-child)::after{content:"";position:absolute;top:15px;left:calc(100% - 2px);width:14px;border-top:2px dotted var(--line)}
+.rowlabel{font-weight:600;font-size:14.5px;padding-top:10px;display:flex;align-items:flex-start;gap:8px}
+.rowlabel .dot{margin-top:7px}
+.cell{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:10px 12px;min-width:0;display:flex}
+.cell:focus-within{border-color:var(--ink);background:var(--surface)}
+.cell textarea{margin:0;width:100%;padding:0;border:0;min-height:80px;font-size:14px;background:transparent!important}
+.cell.problems textarea{color:var(--bad)}
+.cell.solution textarea{color:var(--good)}
+.caveat{display:flex;gap:12px;align-items:flex-start;background:color-mix(in oklch,var(--amber) 14%,var(--surface));border:1px solid color-mix(in oklch,var(--amber) 45%,var(--line));border-radius:14px;padding:12px 16px;margin:-6px 0 18px}
+.caveat p{margin:0;font-size:13.5px;line-height:1.5;max-width:90ch}
+.caveat-ic{flex:none;width:20px;height:20px;border-radius:50%;background:var(--amber);color:oklch(0.25 0.03 70);display:grid;place-items:center;font-weight:800;font-size:12px;margin-top:1px}
+.teams-h{margin:36px 0 16px}
+.teams-h h3{margin:0;font-size:19px;font-weight:700;letter-spacing:-.01em}
+.teams-h p{margin:4px 0 0;color:var(--muted);max-width:70ch}
+.teams{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:start}
+@media (max-width:1100px){.teams{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.teams{grid-template-columns:minmax(0,1fr)}}
+.team{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.team-h{display:flex;flex-direction:column;gap:6px}
+.team-h b{font-size:15.5px;font-weight:700;display:flex;align-items:center;gap:8px}
+.team-h small{color:var(--muted);font-size:12.5px;line-height:1.4}
+.stage-chip{align-self:flex-start;font-size:12px;font-weight:600;border:1px solid var(--line);border-radius:999px;padding:1px 9px;color:var(--muted)}
+.ideas{display:flex;flex-direction:column;gap:8px;list-style:none;margin:0;padding:0}
+.idea{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:10px 12px;display:flex;flex-direction:column;gap:6px}
+.idea:focus-within{border-color:var(--ink);background:var(--surface)}
+.idea textarea{margin:0;width:100%;padding:0;border:0;min-height:22px;font-size:14px;background:transparent!important}
+.idea-f{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);flex-wrap:wrap}
+.idea-f .sp{flex:1}
+.who{display:inline-flex;align-items:center;gap:6px}
+.who .dot{width:6px;height:6px}
+.lnk{border:0;background:none;padding:2px 4px;border-radius:6px;font-size:12px;font-weight:600;color:var(--muted)}
+.lnk:hover{color:var(--ink);background:var(--beige)}
+.lnk.danger{color:var(--bad)}
+.add{display:flex;flex-direction:column;gap:8px;border-top:1px dashed var(--line);padding-top:12px}
+.add label{font-size:12.5px;font-weight:600;color:var(--muted)}
+.add textarea{margin:0;width:100%;border:1px solid var(--line);background:var(--bg);border-radius:12px;padding:8px 10px;min-height:60px;font-size:14px}
+.add textarea:focus{border-color:var(--ink)}
+.add .btn{align-self:flex-start;padding:6px 14px;font-size:13px;border:0;cursor:pointer}
+.add .btn:disabled{opacity:.4;cursor:default}
+.hint{font-size:13px;color:var(--muted);margin:14px 0 0}
+.cell.dropoff textarea{color:var(--bad)}
+.churn{display:flex;flex-direction:column;gap:12px;border-top:1px dashed var(--line);padding-top:14px;margin-top:2px}
+.churn-h{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;color:var(--bad)}
+.churn-h .dot{background:var(--bad)}
+.churn textarea{color:var(--ink)}
+.sel{appearance:none;-webkit-appearance:none;font:inherit;font-size:14px;font-weight:600;color:var(--ink);background:var(--beige) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23998a77' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 12px center;border:1px solid var(--line);border-radius:999px;padding:5px 30px 5px 12px;align-self:flex-start;max-width:100%;cursor:pointer}
+.sel:disabled{cursor:default}
+.drop{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;font-size:12px;font-weight:700;color:var(--bad);border:1px solid currentColor;border-radius:999px;padding:1px 9px}
+.drop .dot{background:var(--bad);width:6px;height:6px}
+.stage.is-drop .pill{border-color:var(--bad);color:var(--bad)}
+.stage.is-drop .pill .dot{background:var(--bad)}
+.cell.dropoff{background:color-mix(in oklch,var(--bad) 5%,var(--bg));border-color:color-mix(in oklch,var(--bad) 25%,var(--line))}
+
+/* footer cards */
+.legend{display:flex;flex-wrap:wrap;gap:8px}
+.foot{padding-block:24px 72px;color:var(--muted);font-size:13px;text-align:center}
+@media (max-width:640px){.hero{padding-block:48px 36px}.board{padding:14px}}
+@media (prefers-reduced-motion:no-preference){.tab,textarea,.addp,.btn,.nav a{transition:background-color .15s,border-color .15s,color .15s}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.lang{display:inline-flex;gap:2px;padding:3px;background:var(--beige);border:1px solid var(--line);border-radius:999px;margin-right:6px}
+.lang button{border:0;background:transparent;border-radius:999px;padding:3px 10px;font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.02em}
+.lang button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px color-mix(in oklch,var(--ink) 10%,transparent),0 0 0 1px var(--line)}
+#addPersona{align-self:flex-start;margin-top:2px}
+.modal fieldset legend{font-size:12.5px;font-weight:600;color:var(--muted);padding:0;margin-bottom:6px}
+.sec-h .btn{flex:none;border:0;cursor:pointer;font-family:inherit}
+.modal-bg{position:fixed;inset:0;z-index:50;background:color-mix(in oklch,var(--ink) 35%,transparent);display:grid;place-items:center;padding:16px}
+.modal{width:min(560px,100%);max-height:calc(100vh - 32px);overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:14px;box-shadow:0 20px 50px color-mix(in oklch,var(--ink) 25%,transparent)}
+.modal h3{margin:0;font-size:20px;font-weight:700;letter-spacing:-.01em}
+.modal .mf{display:flex;flex-direction:column;gap:5px}
+.modal .mf label,.modal .mf legend{font-size:12.5px;font-weight:600;color:var(--muted);padding:0}
+.modal input[type=text],.modal textarea{font:inherit;font-size:14.5px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:9px 12px;width:100%;margin:0;resize:vertical;min-height:0}
+.modal textarea{min-height:64px;overflow:auto}
+.modal input[type=text]:focus,.modal textarea:focus{outline:none;border-color:var(--ink);background:var(--surface)}
+.modal .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.modal .row2{grid-template-columns:1fr}}
+.modal fieldset{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.seg{display:inline-flex;align-self:flex-start;gap:2px;padding:3px;background:var(--beige);border:1px solid var(--line);border-radius:999px}
+.seg label{position:relative;cursor:pointer}
+.seg input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.seg span{display:inline-block;padding:4px 12px;border-radius:999px;font-size:13px;font-weight:600;color:var(--muted)}
+.seg input:checked+span{background:var(--surface);color:var(--ink);box-shadow:0 0 0 1px var(--line)}
+.seg input[value=one-off]:checked+span{background:var(--bad);color:var(--surface);box-shadow:none}
+.seg input[value=long-term]:checked+span{background:var(--violet);color:var(--surface);box-shadow:none}
+.seg input:focus-visible+span{outline:2px solid var(--ink);outline-offset:2px}
+.modal .err{margin:0;color:var(--bad);font-size:13px;font-weight:600}
+.modal .acts-m{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap}
+.modal .acts-m .btn{border:0;cursor:pointer;font-family:inherit}
+.modal .acts-m .btn:disabled{opacity:.5;cursor:default}
+</style>
+
+</head>
+<body>
+<nav class="nav" aria-label="Sections">
+  <div class="nav-in">
+    <a href="#top" class="on" data-i18n="nav.overview">Overview</a>
+    <a href="#personas-sec" data-i18n="nav.personas">Personas</a>
+    <a href="#journey" data-i18n="nav.journey">Journey map</a>
+    <span class="sp"></span>
+    <div class="lang" role="group" aria-label="Language"><button type="button" data-l="en" aria-pressed="true">EN</button><button type="button" data-l="uk" aria-pressed="false">UA</button></div>
+    <button class="icon-btn" id="theme" type="button" aria-label="Switch to dark theme"><svg viewBox="0 0 24 24" id="themeIc"><path d="M20 14.5A8 8 0 019.5 4a8 8 0 1010.5 10.5z"/></svg></button>
+  </div>
+</nav>
+
+<main class="wrap" id="top">
+  <header class="hero">
+    <span class="badge"><span class="dot"></span><span data-i18n="hero.badge">Customer journey map · draft</span></span>
+    <h1 data-i18n="hero.h1">Who we build Warmy for, and how every team can help it grow.</h1>
+    <p class="lead" data-i18n="hero.lead">We built this CJM to understand who our target audience is, how to attract them, how to keep them, and what to improve in the product so they stay with us.</p>
+    <div class="btns">
+      <a class="btn primary" href="#personas-sec" data-i18n="btn.personas">See personas</a>
+      <a class="btn secondary" href="#journey" data-i18n="btn.journey">Open journey map</a>
+    </div>
+    <div class="status" id="status" data-s="idle" role="status"><span class="dot"></span><span id="statusText">Connecting to the shared board</span></div>
+  </header>
+
+  <section class="sec" id="personas-sec" aria-labelledby="ph">
+    <div class="sec-h">
+      <div><h2 id="ph" data-i18n="personas.h">User personas</h2><p data-i18n="personas.p"></p></div>
+      <button class="btn primary" id="addPersona" type="button" data-i18n="add.persona.btn">Add new persona</button>
+    </div>
+    <div class="personas" id="personas"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
+  </section>
+
+  <section class="sec" id="journey" aria-labelledby="jh">
+    <div class="sec-h">
+      <div><h2 id="jh" data-i18n="journey.h">Journey map</h2><p data-i18n="journey.p"></p></div>
+      <div class="tabs" id="tabs" role="tablist" aria-label="Persona"></div>
+    </div>
+    <div class="caveat" role="note"><span class="caveat-ic" aria-hidden="true">!</span><p data-i18n="caveat"></p></div>
+    <div class="board">
+      <div class="scroller"><div class="grid" id="grid"></div></div>
+    </div>
+    <p class="hint" id="cjmHint"></p>
+
+    <div class="teams-h">
+      <h3 data-i18n="teams.h">What each team can do</h3>
+      <p id="teamsSub"></p>
+    </div>
+    <div class="teams" id="teams"></div>
+  </section>
+
+  <p class="foot" data-i18n="foot">Who We Build Warmy For · working draft for the team</p>
+</main>
+<div class="modal-bg" id="pModal" hidden>
+  <form class="modal" id="pForm" role="dialog" aria-modal="true" aria-labelledby="pmTitle" novalidate>
+    <h3 id="pmTitle" data-i18n="m.title">Add new persona</h3>
+    <div class="mf"><label for="pm-tag" data-i18n="m.name">Name</label><input type="text" id="pm-tag" maxlength="40" autocomplete="off"></div>
+    <div class="mf"><label for="pm-role" data-i18n="m.role">Persona</label><textarea id="pm-role" rows="2"></textarea></div>
+    <div class="row2">
+      <div class="mf"><label for="pm-size" data-i18n="m.size">Size</label><input type="text" id="pm-size" autocomplete="off"></div>
+      <div class="mf"><label for="pm-segment" data-i18n="m.segment">Segment</label><input type="text" id="pm-segment" autocomplete="off"></div>
+    </div>
+    <div class="mf"><label for="pm-goal" data-i18n="m.goal">Goal</label><textarea id="pm-goal" rows="2"></textarea></div>
+    <fieldset><legend data-i18n="m.intent">What they want</legend>
+      <div class="seg">
+        <label><input type="radio" name="pm-intent" value="" checked><span data-i18n="m.notset">Not sure yet</span></label>
+        <label><input type="radio" name="pm-intent" value="one-off"><span data-i18n="oneoff">One-off</span></label>
+        <label><input type="radio" name="pm-intent" value="long-term"><span data-i18n="longterm">Long-term</span></label>
+      </div>
+    </fieldset>
+    <div class="mf"><label for="pm-story" data-i18n="m.story">User story</label><textarea id="pm-story" rows="2"></textarea></div>
+    <div class="mf"><label for="pm-churn" data-i18n="churn.l">Why they cancel</label><textarea id="pm-churn" rows="2"></textarea></div>
+    <p class="err" id="pmErr" hidden></p>
+    <div class="acts-m"><button type="button" class="btn secondary" id="pmCancel" data-i18n="m.cancel">Cancel</button><button type="submit" class="btn primary" id="pmSave" data-i18n="m.save">Save persona</button></div>
+  </form>
+</div>
+
+<script>
+/* Team data lives in a Google Sheet behind an Apps Script web app.
+   This adapter gives the page the same db API it uses on claude.ai. */
+(function(){
+  const API_URL = "";
+  const SEED = [{"c":"personas","id":"guardian","data":{"churn":"No results or lost trust: \"Inbox placement still 0% to the inboxes we need\" (Company H), \"On Spamhaus blacklist twice because of using Warmy\" and warm-up kept turning back on after pause (Company I), \"Not seeing good deliverability\" with DNS issues on their side (Company J), \"Email blast also did not get good open rate\" (Company K). HubSpot often logs this as \"Don't need it anymore\".","churn_uk":"Немає результату або втратили довіру: «Inbox placement still 0% to the inboxes we need» (Company H),  «Not seeing good deliverability» з проблемами DNS на їхньому боці (Company J), «Email blast also did not get good open rate» (Company K). У HubSpot це часто записують як «Don't need it anymore».","goal":"Get emails out of spam and into the inbox, with numbers that prove it.","goal_uk":"Вивести листи зі спаму в inbox і мати цифри, які це доводять.","intent":"long-term","order":3,"paid":"≈ $1.3K","role":"Head of RevOps, marketing manager, founder or VP Growth who buys Warmy to fix placement that is already poor.","role_uk":"Head of RevOps, маркетинг-менеджер, засновник або VP Growth, який купує Warmy, щоб виправити вже погану доставку в inbox.","segment":"B2B outbound and marketing email","segment_uk":"B2B outbound і маркетингові розсилки","share":"? · 4 of 15","size":"78–186 employees in the sample (mostly Medium) · several mailboxes or marketing domains, $500–2,200 paid","sizeShort":"78–186 emp.","size_uk":"78–186 працівників у вибірці (переважно середні) · кілька скриньок чи маркетингових доменів, заплатили $500–2 200","story":"As a Show-Me Sender, I want to see inbox placement improve within weeks, and understand why when it doesn't, so I can justify the spend.","story_uk":"Як Show-Me Sender, я хочу бачити, що inbox placement покращується за кілька тижнів, і розуміти чому, якщо ні, щоб обґрунтувати витрати.","tag":"The Show-Me Sender","value":"$$ · avg $1.3K"}},{"c":"personas","id":"hunter","data":{"churn":"Job done, left satisfied: \"We are through with needing to warm up our domain\" (Company A), \"Already fixed our domain reputation issue. If we need help we know where to go\" (Company B), \"Warmed up enough\" (Company C, later asked to come back for a month).","churn_uk":"Задачу виконано, пішли задоволені: «We are through with needing to warm up our domain» (Company A), «Already fixed our domain reputation issue. If we need help we know where to go» (Company B), «Warmed up enough» (Company C, згодом попросили повернутися на місяць).","goal":"Fix one domain problem fast, then stop paying.","goal_uk":"Швидко виправити одну проблему домену і перестати платити.","intent":"one-off","order":1,"paid":"≈ $1.2K","role":"Marketing or campaign manager, COO or innovation lead who comes with one urgent domain problem: a new domain to warm up or a damaged domain reputation.","role_uk":"Маркетолог чи менеджер кампаній, COO або керівник з інновацій, який приходить з однією терміновою проблемою домену: новий домен треба прогріти або відновити пошкоджену репутацію домену.","segment":"B2B and e-commerce · one-off domain fix","segment_uk":"B2B та e-commerce · разове виправлення домену","share":"? · 3 of 15","size":"30–1,400 employees in the sample (all sizes) · custom plans, $230–1,900 paid","sizeShort":"30–1,400 emp.","size_uk":"30–1 400 працівників у вибірці (усі розміри) · custom-плани, заплатили $230–1 900","story":"As a Firefighter, I want my domain warmed up or its reputation repaired within weeks, with a clear point where the job is done, so I can get back to sending.","story_uk":"Як Firefighter, я хочу, щоб мій домен прогріли або відновили його репутацію за кілька тижнів і щоб було чітко видно, коли роботу завершено, тоді я зможу повернутися до розсилок.","tag":"The Firefighter","value":"$$ · avg $1.2K"}},{"c":"personas","id":"juggler","data":{"churn":"Outreach stopped or paused: \"Stopped cold outreach\" (Company D), \"Will get back when we are ready for the next campaign\" (Company E, marketing team changing), \"Seed lists are better but I'm stopping cold emails\" (Company F). One more left with no detail (Company G).","churn_uk":"Розсилки зупинили або поставили на паузу: «Stopped cold outreach» (Company D), «Will get back when we are ready for the next campaign» (Company E, змінюється маркетингова команда), «Seed lists are better but I'm stopping cold emails» (Company F). Ще одна компанія пішла без пояснень (Company G).","goal":"Get mailboxes ready before a campaign, run it, and stop paying until the next one.","goal_uk":"Підготувати скриньки до кампанії, провести її і не платити до наступної.","intent":"one-off","order":2,"paid":"≈ $1.0K","role":"Sales, inside sales or marketing lead at a mid-size or large company that runs cold outreach in campaigns, not all year.","role_uk":"Керівник продажів, inside sales або маркетингу в середній чи великій компанії, яка робить cold outreach кампаніями, а не цілий рік.","segment":"B2B · campaign-based cold email","segment_uk":"B2B · cold email кампаніями","share":"? · 4 of 15","size":"160+ employees in the sample (Large and Medium) · few mailboxes and low spend for their size","sizeShort":"500+ emp.","size_uk":"160+ працівників у вибірці (великі та середні) · мало скриньок і невеликі витрати як для свого розміру","story":"As a Boomerang, I want mailboxes ready when a campaign starts and a way to pause when it ends, so I only pay while we're sending.","story_uk":"Як Boomerang, я хочу, щоб скриньки були готові на старті кампанії і щоб їх можна було поставити на паузу після неї, тоді я платитиму лише тоді, коли ми розсилаємо.","tag":"The Boomerang","value":"$$ · avg $1.0K"}},{"c":"personas","id":"pmuwqu8ma","data":{"churn":"Found another way or the setup changed: \"Have own warm-up solution that works\" (Company L), switched away from Sender.net and couldn't connect it without SMTP, \"happy with us, will be back\" (Company M), stopped after about 2 years of paying with no reason recorded (Company N).","churn_uk":"Знайшли інший спосіб або змінився сетап: «Have own warm-up solution that works» (Company L), перейшли з Sender.net і не змогли підключити його без SMTP, «happy with us, will be back» (Company M), перестали платити приблизно після 2 років без зафіксованої причини (Company N).","goal":"Run high-volume sending across many mailboxes and domains at a predictable cost.","goal_uk":"Розсилати великі обсяги з багатьох скриньок і доменів за передбачувану ціну.","intent":"long-term","order":4,"paid":"≈ $2.8K","role":"Agency owner, founder or CMO running many mailboxes and side domains for outreach or ESP marketing.","role_uk":"Власник агенції, засновник або CMO, який керує багатьма скриньками й додатковими доменами для outreach чи маркетингу через ESP.","segment":"Agencies, multi-domain outreach, ESP marketing","segment_uk":"Агенції, outreach з багатьох доменів, маркетинг через ESP","share":"? · 3 of 15","size":"3–19 employees in the sample (Small) · 20+ mailboxes, many domains, large seed list plans","sizeShort":"3–19 emp.","size_uk":"3–19 працівників у вибірці (малі) · 20+ скриньок, багато доменів, великі плани seed list","story":"As a Fleet Admiral, I want warm-up and seed lists to work with every tool and ESP I use, at volume, so I don't need to build my own solution.","story_uk":"Як Fleet Admiral, я хочу, щоб прогрів і seed lists працювали з кожним інструментом та ESP, якими я користуюся, на великих обсягах, щоб мені не довелося будувати власне рішення.","tag":"The Fleet Admiral","value":"$$$ · avg $2.8K"}},{"c":"cells","id":"guardian__activation__dropoff","data":{"persona":"guardian","row":"dropoff","stage":"activation","text":"Medium risk. The first doubts appear here.","text_uk":"Середній ризик. Тут з'являються перші сумніви."}},{"c":"cells","id":"guardian__activation__goal","data":{"persona":"guardian","row":"goal","stage":"activation","text":"Connect mailboxes and see improvement fast.","text_uk":"Підключити скриньки і швидко побачити покращення."}},{"c":"cells","id":"guardian__activation__problems","data":{"persona":"guardian","row":"problems","stage":"activation","text":"Problems on their side (invalid DNS records, blocks) aren't caught at setup. The first meeting happens only after payment.","text_uk":"Проблеми на їхньому боці (неправильні DNS-записи, блокування) не виявляють під час налаштування. Перша зустріч відбувається лише після оплати."}},{"c":"cells","id":"guardian__activation__solution","data":{"persona":"guardian","row":"solution","stage":"activation","text":"Before warm-up starts, check DNS records, blacklists and current inbox placement, and show this as a baseline.","text_uk":"Перед стартом прогріву перевіряти DNS-записи, blacklist і поточний inbox placement та показувати це як точку відліку."}},{"c":"cells","id":"guardian__activation__thoughts","data":{"persona":"guardian","row":"thoughts","stage":"activation","text":"\"We paid, now show us results.\"","text_uk":"«Ми заплатили, тепер покажіть результат.»"}},{"c":"cells","id":"guardian__attraction__dropoff","data":{"persona":"guardian","row":"dropoff","stage":"attraction","text":"Low risk. They buy quickly (Company J signed a custom deal in 2 days).","text_uk":"Низький ризик. Купують швидко (Company J підписали custom-угоду за 2 дні)."}},{"c":"cells","id":"guardian__attraction__goal","data":{"persona":"guardian","row":"goal","stage":"attraction","text":"Fix poor deliverability that's already hurting outreach or marketing.","text_uk":"Виправити погану доставку, яка вже шкодить outreach чи маркетингу."}},{"c":"cells","id":"guardian__attraction__problems","data":{"persona":"guardian","row":"problems","stage":"attraction","text":"High expectations from day one. They come through Google Ads, organic search, direct visits or the free deliverability test.","text_uk":"Високі очікування з першого дня. Приходять через Google Ads, органічний пошук, прямі заходи або безкоштовний тест доставки."}},{"c":"cells","id":"guardian__attraction__solution","data":{"persona":"guardian","row":"solution","stage":"attraction","text":"Set realistic expectations on landing pages: what warm-up can and can't fix, and typical timelines.","text_uk":"Чесно задавати очікування на лендингах: що прогрів може виправити, а що ні, і які типові строки."}},{"c":"cells","id":"guardian__attraction__thoughts","data":{"persona":"guardian","row":"thoughts","stage":"attraction","text":"\"Our emails go to spam. We need this fixed.\"","text_uk":"«Наші листи йдуть у спам. Це треба виправити.»"}},{"c":"cells","id":"guardian__involvement__dropoff","data":{"persona":"guardian","row":"dropoff","stage":"involvement","text":"Main drop-off. They lose trust and remove mailboxes, often before the call with customer success.","text_uk":"Головна точка відтоку. Втрачають довіру і видаляють скриньки, часто ще до дзвінка з customer success."}},{"c":"cells","id":"guardian__involvement__goal","data":{"persona":"guardian","row":"goal","stage":"involvement","text":"See inbox placement go up.","text_uk":"Бачити, як зростає inbox placement."}},{"c":"cells","id":"guardian__involvement__problems","data":{"persona":"guardian","row":"problems","stage":"involvement","text":"Placement stays at 0%, warm-up turns back on after pause, mixed results across mailboxes.","text_uk":"Placement тримається на 0%, прогрів сам вмикається після паузи, результати різняться між скриньками."}},{"c":"cells","id":"guardian__involvement__solution","data":{"persona":"guardian","row":"solution","stage":"involvement","text":"Alerts when placement drops or a mailbox lands on a blacklist, with clear next steps. A pause that stays paused. Adeline AI explains why mailboxes perform differently.","text_uk":"Алерти, коли placement падає або скринька потрапляє в blacklist, з чіткими наступними кроками. Пауза, яка справді лишається паузою. Adeline AI пояснює, чому скриньки працюють по-різному."}},{"c":"cells","id":"guardian__involvement__thoughts","data":{"persona":"guardian","row":"thoughts","stage":"involvement","text":"\"Our domains get worse every week.\" \"Why do some mailboxes get 90% and others 40%?\"","text_uk":"«Наші домени гіршають щотижня.» «Чому одні скриньки мають 90%, а інші 40%?»"}},{"c":"cells","id":"guardian__retention__dropoff","data":{"persona":"guardian","row":"dropoff","stage":"retention","text":"Those who stay cut mailboxes, then stop (Company K).","text_uk":"Ті, хто лишається, скорочують скриньки, а потім зупиняються (Company K)."}},{"c":"cells","id":"guardian__retention__goal","data":{"persona":"guardian","row":"goal","stage":"retention","text":"Most never get here.","text_uk":"Більшість сюди не доходить."}},{"c":"cells","id":"guardian__retention__problems","data":{"persona":"guardian","row":"problems","stage":"retention","text":"They leave angry, and the real reason gets logged in HubSpot as \"Don't need it anymore\".","text_uk":"Йдуть розлючені, а справжню причину в HubSpot записують як «Don't need it anymore»."}},{"c":"cells","id":"guardian__retention__solution","data":{"persona":"guardian","row":"solution","stage":"retention","text":"Customer success reaches out as soon as results stall. Record the real cancel reason in HubSpot.","text_uk":"Customer success звертається, щойно результати зупиняються. Записувати справжню причину скасування в HubSpot."}},{"c":"cells","id":"guardian__retention__thoughts","data":{"persona":"guardian","row":"thoughts","stage":"retention","text":"\"This tool hurt our domain.\"","text_uk":"«Цей інструмент зашкодив нашому домену.»"}},{"c":"cells","id":"hunter__activation__dropoff","data":{"persona":"hunter","row":"dropoff","stage":"activation","text":"Low risk.","text_uk":"Низький ризик."}},{"c":"cells","id":"hunter__activation__goal","data":{"persona":"hunter","row":"goal","stage":"activation","text":"Pick a plan and start the fix within days.","text_uk":"Обрати план і почати виправлення за кілька днів."}},{"c":"cells","id":"hunter__activation__problems","data":{"persona":"hunter","row":"problems","stage":"activation","text":"Start depends on a sales call and a custom plan. Most pay in 1–4 days, but Company C took 2 months to close.","text_uk":"Старт залежить від дзвінка з продажами і custom-плану. Більшість платять за 1–4 дні, але угоду з Company C закривали 2 місяці."}},{"c":"cells","id":"hunter__activation__solution","data":{"persona":"hunter","row":"solution","stage":"activation","text":"A self-serve \"fix my domain\" plan with a fixed timeline. One call to agree on the goal and the finish line.","text_uk":"Self-serve план «виправити мій домен» з фіксованими строками. Один дзвінок, щоб узгодити мету і фінальну точку."}},{"c":"cells","id":"hunter__activation__thoughts","data":{"persona":"hunter","row":"thoughts","stage":"activation","text":"\"Let's talk to someone, agree on a plan and start now.\"","text_uk":"«Поговорімо з кимось, домовимося про план і почнемо вже зараз.»"}},{"c":"cells","id":"hunter__attraction__dropoff","data":{"persona":"hunter","row":"dropoff","stage":"attraction","text":"Low risk. They know what they need and close fast.","text_uk":"Низький ризик. Вони знають, що їм потрібно, і швидко купують."}},{"c":"cells","id":"hunter__attraction__goal","data":{"persona":"hunter","row":"goal","stage":"attraction","text":"Fix one urgent problem fast: a new domain to warm up or a damaged domain reputation.","text_uk":"Швидко вирішити одну термінову проблему: прогріти новий домен або відновити пошкоджену репутацію домену."}},{"c":"cells","id":"hunter__attraction__problems","data":{"persona":"hunter","row":"problems","stage":"attraction","text":"Arrive in a hurry through branded or competitor Google Ads and affiliates. Need proof Warmy fixes their exact case.","text_uk":"Приходять поспіхом через брендову чи конкурентну рекламу Google Ads та афіліатів. Їм потрібен доказ, що Warmy вирішує саме їхній випадок."}},{"c":"cells","id":"hunter__attraction__solution","data":{"persona":"hunter","row":"solution","stage":"attraction","text":"Landing pages and ads per problem (\"fix domain reputation\", \"warm up a new domain\") with a realistic timeline.","text_uk":"Лендинги й реклама під кожну проблему («виправити репутацію домену», «прогріти новий домен») з реалістичними строками."}},{"c":"cells","id":"hunter__attraction__thoughts","data":{"persona":"hunter","row":"thoughts","stage":"attraction","text":"\"Our domain is in trouble and we need it sorted this month.\" Already comparing Warmy with competitors.","text_uk":"«Наш домен у біді, і це треба вирішити цього місяця.» Уже порівнюють Warmy з конкурентами."}},{"c":"cells","id":"hunter__involvement__dropoff","data":{"persona":"hunter","row":"dropoff","stage":"involvement","text":"Medium risk. Once the numbers look good, they start planning to cancel.","text_uk":"Середній ризик. Щойно цифри виглядають добре, починають планувати скасування."}},{"c":"cells","id":"hunter__involvement__goal","data":{"persona":"hunter","row":"goal","stage":"involvement","text":"See the domain recover: warm-up running, reputation going up.","text_uk":"Бачити, як домен відновлюється: прогрів працює, репутація зростає."}},{"c":"cells","id":"hunter__involvement__problems","data":{"persona":"hunter","row":"problems","stage":"involvement","text":"No visible finish line. They decide on their own when it's \"enough\".","text_uk":"Немає видимої фінальної точки. Вони самі вирішують, коли вже «досить»."}},{"c":"cells","id":"hunter__involvement__solution","data":{"persona":"hunter","row":"solution","stage":"involvement","text":"Show progress toward a target (health score, inbox placement) and a clear \"done\" moment with next steps.","text_uk":"Показувати прогрес до цілі (health score, inbox placement) і чіткий момент «готово» з наступними кроками."}},{"c":"cells","id":"hunter__involvement__thoughts","data":{"persona":"hunter","row":"thoughts","stage":"involvement","text":"\"Is it working? When are we done?\"","text_uk":"«Це працює? Коли ми закінчимо?»"}},{"c":"cells","id":"hunter__retention__dropoff","data":{"persona":"hunter","row":"dropoff","stage":"retention","text":"Main drop-off. They leave satisfied: \"job done\", \"we know where to go\". Company C later asked to come back for a month.","text_uk":"Головна точка відтоку. Йдуть задоволені: «job done», «we know where to go». Company C згодом попросили повернутися на місяць."}},{"c":"cells","id":"hunter__retention__goal","data":{"persona":"hunter","row":"goal","stage":"retention","text":"Nothing left to fix. Keep costs down.","text_uk":"Більше нічого виправляти. Зменшити витрати."}},{"c":"cells","id":"hunter__retention__problems","data":{"persona":"hunter","row":"problems","stage":"retention","text":"Warmy looks like a one-off fix, not ongoing protection. Once the domain is fixed, there's no reason to stay.","text_uk":"Warmy виглядає як разове виправлення, а не постійний захист. Щойно домен полагоджено, причин залишатися немає."}},{"c":"cells","id":"hunter__retention__solution","data":{"persona":"hunter","row":"solution","stage":"retention","text":"After the fix, offer a low-cost monitoring plan: alerts, blacklist checks, a weekly email deliverability test. Make it easy to pause and come back.","text_uk":"Після виправлення пропонувати недорогий план моніторингу: алерти, перевірки blacklist, щотижневий email deliverability test. Зробити паузу й повернення простими."}},{"c":"cells","id":"hunter__retention__thoughts","data":{"persona":"hunter","row":"thoughts","stage":"retention","text":"\"Service was good. We are through with needing to warm up our domain.\" (Company A)","text_uk":"«Service was good. We are through with needing to warm up our domain.» (Company A)"}},{"c":"cells","id":"juggler__activation__dropoff","data":{"persona":"juggler","row":"dropoff","stage":"activation","text":"Low risk.","text_uk":"Низький ризик."}},{"c":"cells","id":"juggler__activation__goal","data":{"persona":"juggler","row":"goal","stage":"activation","text":"Start warm-up on several mailboxes at once.","text_uk":"Запустити прогрів одразу на кількох скриньках."}},{"c":"cells","id":"juggler__activation__problems","data":{"persona":"juggler","row":"problems","stage":"activation","text":"The onboarding call comes late or never: Company G met us 3 months after buying, Company E never did.","text_uk":"Онбординг-дзвінок буває пізно або не буває взагалі: Company G зустрілися з нами через 3 місяці після покупки, Company E не зустрічалися зовсім."}},{"c":"cells","id":"juggler__activation__solution","data":{"persona":"juggler","row":"solution","stage":"activation","text":"Onboarding in the first week and a campaign checklist: mailboxes, DNS records, warm-up timeline.","text_uk":"Онбординг у перший тиждень і чекліст кампанії: скриньки, DNS-записи, графік прогріву."}},{"c":"cells","id":"juggler__activation__thoughts","data":{"persona":"juggler","row":"thoughts","stage":"activation","text":"\"Buy, connect, go.\" Often several subscriptions at once (5 Starter, 5 Custom).","text_uk":"«Купили, підключили, поїхали.» Часто кілька підписок одразу (5 Starter, 5 Custom)."}},{"c":"cells","id":"juggler__attraction__dropoff","data":{"persona":"juggler","row":"dropoff","stage":"attraction","text":"Low risk. They often pay the next day.","text_uk":"Низький ризик. Часто платять наступного ж дня."}},{"c":"cells","id":"juggler__attraction__goal","data":{"persona":"juggler","row":"goal","stage":"attraction","text":"Get sending ready for an upcoming outreach campaign.","text_uk":"Підготувати розсилки до майбутньої outreach-кампанії."}},{"c":"cells","id":"juggler__attraction__problems","data":{"persona":"juggler","row":"problems","stage":"attraction","text":"No single entry point: organic search, branded ads, our own sales outreach, direct visits.","text_uk":"Немає однієї точки входу: органічний пошук, брендова реклама, наш власний outreach, прямі заходи на сайт."}},{"c":"cells","id":"juggler__attraction__solution","data":{"persona":"juggler","row":"solution","stage":"attraction","text":"Pages and ads built around a campaign launch: \"mailboxes ready in X weeks\".","text_uk":"Сторінки й реклама навколо запуску кампанії: «скриньки готові за X тижнів»."}},{"c":"cells","id":"juggler__attraction__thoughts","data":{"persona":"juggler","row":"thoughts","stage":"attraction","text":"\"A campaign is coming and our mailboxes need to be ready.\"","text_uk":"«Скоро кампанія, і наші скриньки мають бути готові.»"}},{"c":"cells","id":"juggler__involvement__dropoff","data":{"persona":"juggler","row":"dropoff","stage":"involvement","text":"Medium risk. Usage drops as soon as the campaign ends.","text_uk":"Середній ризик. Використання падає, щойно кампанія закінчується."}},{"c":"cells","id":"juggler__involvement__goal","data":{"persona":"juggler","row":"goal","stage":"involvement","text":"Send the campaign and land in the inbox.","text_uk":"Провести кампанію і потрапити в inbox."}},{"c":"cells","id":"juggler__involvement__problems","data":{"persona":"juggler","row":"problems","stage":"involvement","text":"Value becomes invisible while Warmy runs in the background. Company F used seed lists for about a year and liked them, but still left.","text_uk":"Цінність стає непомітною, поки Warmy працює у фоні. Company F користувалися seed lists приблизно рік і були задоволені, але все одно пішли."}},{"c":"cells","id":"juggler__involvement__solution","data":{"persona":"juggler","row":"solution","stage":"involvement","text":"A campaign report: what warm-up and seed lists did for this campaign's inbox placement.","text_uk":"Звіт по кампанії: що прогрів і seed lists дали для inbox placement саме цієї кампанії."}},{"c":"cells","id":"juggler__involvement__thoughts","data":{"persona":"juggler","row":"thoughts","stage":"involvement","text":"\"The campaign is live, Warmy runs in the background.\"","text_uk":"«Кампанія запущена, Warmy працює у фоні.»"}},{"c":"cells","id":"juggler__retention__dropoff","data":{"persona":"juggler","row":"dropoff","stage":"retention","text":"Main drop-off. They cancel when outreach stops and promise to come back.","text_uk":"Головна точка відтоку. Скасовують, коли outreach зупиняється, і обіцяють повернутися."}},{"c":"cells","id":"juggler__retention__goal","data":{"persona":"juggler","row":"goal","stage":"retention","text":"Stop paying between campaigns.","text_uk":"Не платити між кампаніями."}},{"c":"cells","id":"juggler__retention__problems","data":{"persona":"juggler","row":"problems","stage":"retention","text":"Cancelling is the only way they see to stop paying. Team changes end the project.","text_uk":"Скасування для них єдиний видимий спосіб перестати платити. Зміни в команді закривають проєкт."}},{"c":"cells","id":"juggler__retention__solution","data":{"persona":"juggler","row":"solution","stage":"retention","text":"A pause option (freeze or low-volume warm-up), a reminder before the next campaign, and a win-back email flow.","text_uk":"Пауза підписки (заморозка або прогрів на мінімальному обсязі), нагадування перед наступною кампанією і серія листів для повернення."}},{"c":"cells","id":"juggler__retention__thoughts","data":{"persona":"juggler","row":"thoughts","stage":"retention","text":"\"We're not sending now, so why pay?\" \"We'll come back for the next campaign.\"","text_uk":"«Ми зараз не розсилаємо, то навіщо платити?» «Повернемося до наступної кампанії.»"}},{"c":"cells","id":"pmuwqu8ma__activation__dropoff","data":{"persona":"pmuwqu8ma","row":"dropoff","stage":"activation","text":"Low risk.","text_uk":"Низький ризик."}},{"c":"cells","id":"pmuwqu8ma__activation__goal","data":{"persona":"pmuwqu8ma","row":"goal","stage":"activation","text":"Set up many mailboxes at once.","text_uk":"Налаштувати багато скриньок одразу."}},{"c":"cells","id":"pmuwqu8ma__activation__problems","data":{"persona":"pmuwqu8ma","row":"problems","stage":"activation","text":"The onboarding call comes late (Company L: 2 months after buying). Setup at scale is manual. ","text_uk":"Онбординг-дзвінок буває пізно (Company L: через 2 місяці після покупки). Налаштування у великому масштабі роблять вручну."}},{"c":"cells","id":"pmuwqu8ma__activation__solution","data":{"persona":"pmuwqu8ma","row":"solution","stage":"activation","text":"Bulk connect and bulk actions in the first session. Onboarding in the first week.","text_uk":"Масове підключення й масові дії в першій же сесії. Онбординг у перший тиждень."}},{"c":"cells","id":"pmuwqu8ma__activation__thoughts","data":{"persona":"pmuwqu8ma","row":"thoughts","stage":"activation","text":"\"Let's get all of them running this week.\" Company L bought 20 Platinum mailboxes in 6 days.","text_uk":"«Запустімо їх усі цього тижня.» Company L купили 20 скриньок Platinum за 6 днів."}},{"c":"cells","id":"pmuwqu8ma__attraction__dropoff","data":{"persona":"pmuwqu8ma","row":"dropoff","stage":"attraction","text":"Low risk.","text_uk":"Низький ризик."}},{"c":"cells","id":"pmuwqu8ma__attraction__goal","data":{"persona":"pmuwqu8ma","row":"goal","stage":"attraction","text":"Find warm-up that handles high volume across many domains.","text_uk":"Знайти прогрів, який витримує великі обсяги на багатьох доменах."}},{"c":"cells","id":"pmuwqu8ma__attraction__problems","data":{"persona":"pmuwqu8ma","row":"problems","stage":"attraction","text":"Come through demos, events and the pricing page. Some take a long time to decide (Company M: 6 months to first payment).","text_uk":"Приходять через демо, події та сторінку цін. Дехто довго вирішує (Company M: 6 місяців до першої оплати)."}},{"c":"cells","id":"pmuwqu8ma__attraction__solution","data":{"persona":"pmuwqu8ma","row":"solution","stage":"attraction","text":"Volume pricing and an agency page that shows the cost per mailbox clearly.","text_uk":"Ціни за обсяг і сторінка для агенцій, яка чітко показує ціну за скриньку."}},{"c":"cells","id":"pmuwqu8ma__attraction__thoughts","data":{"persona":"pmuwqu8ma","row":"thoughts","stage":"attraction","text":"\"We need a lot of mailboxes warmed up, fast.\"","text_uk":"«Нам треба прогріти багато скриньок, і швидко.»"}},{"c":"cells","id":"pmuwqu8ma__involvement__dropoff","data":{"persona":"pmuwqu8ma","row":"dropoff","stage":"involvement","text":"Medium risk. One tool change can break the whole use case.","text_uk":"Середній ризик. Одна зміна інструмента може зламати весь сценарій."}},{"c":"cells","id":"pmuwqu8ma__involvement__goal","data":{"persona":"pmuwqu8ma","row":"goal","stage":"involvement","text":"Keep every mailbox healthy, even as their tools change.","text_uk":"Тримати кожну скриньку здоровою, навіть коли змінюються їхні інструменти."}},{"c":"cells","id":"pmuwqu8ma__involvement__problems","data":{"persona":"pmuwqu8ma","row":"problems","stage":"involvement","text":"An ESP without SMTP (Sender.net) can't connect. They compare our price with running their own warm-up.","text_uk":"ESP без SMTP (Sender.net) не підключається. Порівнюють нашу ціну з власним прогрівом."}},{"c":"cells","id":"pmuwqu8ma__involvement__solution","data":{"persona":"pmuwqu8ma","row":"solution","stage":"involvement","text":"More ESP integrations, results per provider (for example Yahoo), and a clear comparison of Warmy's cost with running their own warm-up.","text_uk":"Більше інтеграцій з ESP, результати за провайдерами (наприклад, Yahoo) і чітке порівняння ціни Warmy з власним прогрівом."}},{"c":"cells","id":"pmuwqu8ma__involvement__thoughts","data":{"persona":"pmuwqu8ma","row":"thoughts","stage":"involvement","text":"\"Does Warmy work with our new ESP?\" \"Could we build this ourselves for less?\"","text_uk":"«Чи працює Warmy з нашим новим ESP?» «Чи можемо ми зробити це самі дешевше?»"}},{"c":"cells","id":"pmuwqu8ma__retention__dropoff","data":{"persona":"pmuwqu8ma","row":"dropoff","stage":"retention","text":"Main drop-off. They leave after months or years of high spend, often quietly.","text_uk":"Головна точка відтоку. Йдуть після місяців чи років великих витрат, часто тихо."}},{"c":"cells","id":"pmuwqu8ma__retention__goal","data":{"persona":"pmuwqu8ma","row":"goal","stage":"retention","text":"Lower the cost per mailbox or move to their own setup.","text_uk":"Знизити ціну за скриньку або перейти на власний сетап."}},{"c":"cells","id":"pmuwqu8ma__retention__problems","data":{"persona":"pmuwqu8ma","row":"problems","stage":"retention","text":"Nobody captured why a long-time power user left (Company N). Follow-ups go unanswered.","text_uk":"Ніхто не з'ясував, чому пішов давній активний клієнт (Company N). На follow-up не відповідають."}},{"c":"cells","id":"pmuwqu8ma__retention__solution","data":{"persona":"pmuwqu8ma","row":"solution","stage":"retention","text":"Account reviews for high-spend customers, alerts to customer success when usage drops, and volume discounts offered before renewal.","text_uk":"Огляди акаунтів для клієнтів з великими витратами, алерти для customer success, коли падає використання, і знижки за обсяг перед продовженням."}},{"c":"cells","id":"pmuwqu8ma__retention__thoughts","data":{"persona":"pmuwqu8ma","row":"thoughts","stage":"retention","text":"\"Happy with you, we'll be back.\" \"Our own solution works now.\"","text_uk":"«Ми задоволені, ще повернемося.» «Наше власне рішення тепер працює.»"}},{"c":"ideas","id":"d-guardian-cs-1","data":{"createdAt":24,"persona":"guardian","source":"draft","team":"cs","text":"Early-warning playbook: if inbox placement hasn't improved after 14 days, reach out with a diagnosis before the customer removes mailboxes.","text_uk":"Сценарій раннього попередження: якщо inbox placement не покращився за 14 днів, звертатися з діагнозом, поки клієнт не видалив скриньки."}},{"c":"ideas","id":"d-guardian-cs-2","data":{"createdAt":25,"persona":"guardian","source":"draft","team":"cs","text":"Record the real cancel reason (no results, bug) instead of \"Don't need it anymore\", so Product sees how big this problem really is.","text_uk":"Записувати справжню причину скасування (немає результату, баг) замість «Don't need it anymore», щоб продукт бачив реальний масштаб проблеми."}},{"c":"ideas","id":"d-guardian-dev-1","data":{"createdAt":26,"persona":"guardian","source":"draft","team":"dev","text":"Pre-flight check when a mailbox is connected: DNS records, blacklists, provider blocks. If setup is broken, show a fix list before warm-up starts.","text_uk":"Перевірка перед стартом під час підключення скриньки: DNS-записи, blacklist, блокування провайдерів. Якщо налаштування зламане, показувати список виправлень до початку прогріву."}},{"c":"ideas","id":"d-guardian-dev-3","data":{"createdAt":28,"persona":"guardian","source":"draft","team":"dev","text":"Adeline AI explains each mailbox: why one gets 90% inbox placement and another 40%, and what to fix.","text_uk":"Adeline AI пояснює кожну скриньку: чому одна має 90% inbox placement, а інша 40%, і що виправити."}},{"c":"ideas","id":"d-guardian-dev-4","data":{"createdAt":29,"persona":"guardian","source":"draft","team":"dev","text":"Safety brake: when a domain lands on a blacklist, Warmy slows warm-up automatically and sends an alert with next steps.","text_uk":"Аварійне гальмо: коли домен потрапляє в blacklist, Warmy автоматично сповільнює прогрів і надсилає алерт з наступними кроками."}},{"c":"ideas","id":"d-guardian-marketing-1","data":{"createdAt":20,"persona":"guardian","source":"draft","team":"marketing","text":"Plain content on what warm-up fixes and what it doesn't (DNS records, list quality, email content), with typical timelines. Fewer wrong expectations means fewer angry churns.","text_uk":"Зрозумілий контент про те, що прогрів виправляє, а що ні (DNS-записи, якість бази, зміст листів), з типовими строками. Менше хибних очікувань означає менше розлючених клієнтів, що йдуть."}},{"c":"ideas","id":"d-guardian-marketing-2","data":{"createdAt":21,"persona":"guardian","source":"draft","team":"marketing","text":"Make the free email deliverability test and DNS check the first step in ads and landing pages, so they see their real starting point before they buy.","text_uk":"Зробити безкоштовний email deliverability test і перевірку DNS першим кроком у рекламі та на лендингах, щоб люди бачили свою реальну точку старту ще до покупки."}},{"c":"ideas","id":"d-guardian-sales-1","data":{"createdAt":22,"persona":"guardian","source":"draft","team":"sales","text":"Run a quick audit in the sales call: DNS records, blacklists, current inbox placement. If DNS is broken, sell the fix plan first, not warm-up alone.","text_uk":"Робити швидкий аудит на дзвінку з продажами: DNS-записи, blacklist, поточний inbox placement. Якщо DNS зламаний, спершу продавати план виправлення, а не лише прогрів."}},{"c":"ideas","id":"d-guardian-sales-2","data":{"createdAt":23,"persona":"guardian","source":"draft","team":"sales","text":"Offer a short paid pilot with agreed success numbers instead of a large custom deal on day 2 (Company J).","text_uk":"Пропонувати короткий платний пілот з узгодженими показниками успіху замість великої custom-угоди на другий день (Company J)."}},{"c":"ideas","id":"d-hunter-cs-1","data":{"createdAt":6,"persona":"hunter","source":"draft","team":"cs","text":"\"Graduation\" call when the target is reached: show the results, then move them to a monitoring plan instead of letting them cancel.","text_uk":"«Випускний» дзвінок, коли ціль досягнуто: показати результати й перевести на план моніторингу замість скасування."}},{"c":"ideas","id":"d-hunter-cs-2","data":{"createdAt":7,"persona":"hunter","source":"draft","team":"cs","text":"Check in 30, 60 and 90 days after cancel with a free email deliverability test of their domain. Company C asked to come back, so others will too.","text_uk":"Писати через 30, 60 і 90 днів після скасування з безкоштовним email deliverability test їхнього домену. Company C попросили повернутися, тож інші теж повернуться."}},{"c":"ideas","id":"d-hunter-dev-1","data":{"createdAt":8,"persona":"hunter","source":"draft","team":"dev","text":"Recovery goal in the dashboard: the user sets a target (health score or inbox placement), sees progress, and gets a clear \"done\" state with a recommended next step.","text_uk":"Ціль відновлення в дашборді: користувач задає мету (health score чи inbox placement), бачить прогрес і отримує чіткий стан «готово» з рекомендованим наступним кроком."}},{"c":"ideas","id":"d-hunter-dev-3","data":{"createdAt":10,"persona":"hunter","source":"draft","team":"dev","text":"Cancel flow that asks why. If the answer is \"problem solved\", offer the monitoring plan or a pause instead of a full cancel.","text_uk":"Сценарій скасування, який питає причину. Якщо відповідь «проблему вирішено», пропонувати план моніторингу або паузу замість повного скасування."}},{"c":"ideas","id":"d-hunter-marketing-1","data":{"createdAt":1,"persona":"hunter","source":"draft","team":"marketing","text":"\"Domain rescue\" landing pages per symptom (emails land in Gmail spam, listed on Spamhaus, brand-new domain). Each one opens with the free email deliverability test and shows a typical recovery timeline.","text_uk":"Лендинги «порятунку домену» під кожен симптом (листи йдуть у спам Gmail, домен у Spamhaus, зовсім новий домен). Кожен починається з безкоштовного email deliverability test і показує типові строки відновлення."}},{"c":"ideas","id":"d-hunter-marketing-2","data":{"createdAt":2,"persona":"hunter","source":"draft","team":"marketing","text":"Before/after case studies with the real health score curve (Company A, Company B). Use them in branded and competitor Google Ads, where this persona already comes from.","text_uk":"Кейси «до/після» з реальною кривою health score (Company A, Company B). Використати їх у брендовій і конкурентній рекламі Google Ads, звідки ця персона вже приходить."}},{"c":"ideas","id":"d-hunter-marketing-3","data":{"createdAt":3,"persona":"hunter","source":"draft","team":"marketing","text":"They leave happy, so turn that into referrals: when the health score reaches the target, ask for a review or offer the Affiliate Program link.","text_uk":"Вони йдуть задоволені, тож варто перетворити це на рекомендації: коли health score досягає цілі, просити відгук або пропонувати посилання на Affiliate Program."}},{"c":"ideas","id":"d-hunter-sales-1","data":{"createdAt":4,"persona":"hunter","source":"draft","team":"sales","text":"Sell a fixed \"domain recovery\" package (for example 6 weeks to an agreed health score) instead of an open-ended monthly plan, with a planned move to monitoring at the end.","text_uk":"Продавати фіксований пакет «відновлення домену» (наприклад, 6 тижнів до узгодженого health score) замість безстрокового місячного плану, із запланованим переходом на моніторинг наприкінці."}},{"c":"ideas","id":"d-hunter-sales-2","data":{"createdAt":5,"persona":"hunter","source":"draft","team":"sales","text":"Agree on a measurable finish line in the first call and record it on the deal in HubSpot, so Customer Success knows when to offer the next step.","text_uk":"На першому дзвінку узгоджувати вимірювану фінальну точку і записувати її в угоду в HubSpot, щоб Customer Success знали, коли запропонувати наступний крок."}},{"c":"ideas","id":"d-juggler-cs-1","data":{"createdAt":15,"persona":"juggler","source":"draft","team":"cs","text":"At cancel, ask when the next campaign starts. Set a reminder 3 weeks before and come back with a ready plan.","text_uk":"Під час скасування питати, коли стартує наступна кампанія. Поставити нагадування за 3 тижні й повернутися з готовим планом."}},{"c":"ideas","id":"d-juggler-cs-2","data":{"createdAt":16,"persona":"juggler","source":"draft","team":"cs","text":"When the contact changes (Company E's marketing team changed), hand the account to the new owner with a short summary of the setup and results so far.","text_uk":"Коли змінюється контакт (у Company E змінилася маркетингова команда), передавати акаунт новому відповідальному з коротким підсумком налаштувань і результатів."}},{"c":"ideas","id":"d-juggler-dev-2","data":{"createdAt":18,"persona":"juggler","source":"draft","team":"dev","text":"Campaign mode: the user enters a launch date, Warmy plans the warm-up backwards and shows the date the mailboxes will be ready.","text_uk":"Режим кампанії: користувач вводить дату запуску, Warmy планує прогрів у зворотному порядку і показує дату, коли скриньки будуть готові."}},{"c":"ideas","id":"d-juggler-dev-3","data":{"createdAt":19,"persona":"juggler","source":"draft","team":"dev","text":"Campaign report to share with leadership: warm-up, seed list placement and sending activity for one campaign, in one PDF.","text_uk":"Звіт по кампанії для керівництва: прогрів, placement за seed list і активність розсилок для однієї кампанії в одному PDF."}},{"c":"ideas","id":"d-juggler-marketing-1","data":{"createdAt":11,"persona":"juggler","source":"draft","team":"marketing","text":"Free \"campaign launch planner\" tool: enter the launch date and number of mailboxes, get a warm-up timeline. Pair it with guides like \"Start warm-up 3 weeks before launch\".","text_uk":"Безкоштовний інструмент «планувальник запуску кампанії»: вводиш дату запуску й кількість скриньок і отримуєш графік прогріву. Доповнити гайдами на кшталт «Почніть прогрів за 3 тижні до запуску»."}},{"c":"ideas","id":"d-juggler-marketing-2","data":{"createdAt":12,"persona":"juggler","source":"draft","team":"marketing","text":"Win-back campaigns to churned Boomerangs before typical outbound seasons (January, September): \"Your mailboxes can be ready in 2 weeks.\"","text_uk":"Кампанії повернення для Boomerang, що пішли, перед типовими сезонами outbound (січень, вересень): «Ваші скриньки можуть бути готові за 2 тижні.»"}},{"c":"ideas","id":"d-juggler-sales-1","data":{"createdAt":13,"persona":"juggler","source":"draft","team":"sales","text":"Offer campaign-based pricing: buy a number of active months per year and use them when you send, instead of paying every month.","text_uk":"Пропонувати ціни під кампанії: клієнт купує певну кількість активних місяців на рік і використовує їх, коли розсилає, а не платить щомісяця."}},{"c":"ideas","id":"d-juggler-sales-2","data":{"createdAt":14,"persona":"juggler","source":"draft","team":"sales","text":"Reach large companies on launch signals: new SDR hires, new sending domains registered, a new Head of Sales. Pitch \"mailboxes ready before your campaign\".","text_uk":"Виходити на великі компанії за сигналами запуску: нові SDR у команді, зареєстровані нові домени для розсилок. Пропозиція: «скриньки готові до вашої кампанії»."}},{"c":"ideas","id":"d-pmuwqu8ma-cs-1","data":{"createdAt":34,"persona":"pmuwqu8ma","source":"draft","team":"cs","text":"Usage-drop alert for high-spend accounts (mailboxes removed, warm-up off). Reach out before they cancel. Company N left after 2 years and nobody asked why.","text_uk":"Алерт про падіння використання для клієнтів з великими витратами (видалені скриньки, вимкнений прогрів). Звертатися до того, як вони скасують. Company N пішли після 2 років, і ніхто не спитав чому."}},{"c":"ideas","id":"d-pmuwqu8ma-cs-2","data":{"createdAt":35,"persona":"pmuwqu8ma","source":"draft","team":"cs","text":"Help when they switch ESP: check whether the new ESP can connect and suggest a workaround before the switch, not after.","text_uk":"Допомагати під час переходу на інший ESP: перевірити, чи новий ESP підключиться, і запропонувати обхідний шлях до переходу, а не після."}},{"c":"ideas","id":"d-pmuwqu8ma-dev-1","data":{"createdAt":36,"persona":"pmuwqu8ma","source":"draft","team":"dev","text":"Connect ESPs that have no SMTP (Sender.net) through their API, and sync mailboxes automatically from sending tools like Instantly, Smartlead and lemlist.","text_uk":"Підключати ESP без SMTP (Sender.net) через їхній API і автоматично синхронізувати скриньки з інструментів розсилки на кшталт Instantly, Smartlead і lemlist."}},{"c":"ideas","id":"d-pmuwqu8ma-dev-2","data":{"createdAt":37,"persona":"pmuwqu8ma","source":"draft","team":"dev","text":"Tools for scale: add hundreds of mailboxes by CSV or Warmy API, mailbox groups per client, and reports they can send to clients under their own brand.","text_uk":"Інструменти для масштабу: додавання сотень скриньок через CSV чи Warmy API, групи скриньок для кожного клієнта і звіти, які можна надсилати клієнтам під власним брендом."}},{"c":"ideas","id":"d-pmuwqu8ma-dev-3","data":{"createdAt":38,"persona":"pmuwqu8ma","source":"draft","team":"dev","text":"Webhooks and API coverage for every action","text_uk":"Вебхуки й покриття API для кожної дії"}},{"c":"ideas","id":"d-pmuwqu8ma-marketing-1","data":{"createdAt":30,"persona":"pmuwqu8ma","source":"draft","team":"marketing","text":"Agency program: a listing in the Partner Marketplace, co-marketing, and case studies on cost per mailbox at high volume.","text_uk":"Програма для агенцій: картка в Partner Marketplace, спільний маркетинг і кейси про ціну за скриньку на великих обсягах."}},{"c":"ideas","id":"d-pmuwqu8ma-marketing-2","data":{"createdAt":31,"persona":"pmuwqu8ma","source":"draft","team":"marketing","text":"\"Build your own warm-up or use Warmy\" comparison with the real cost of servers, mailboxes and engineering time.","text_uk":"Порівняння «власний прогрів чи Warmy» з реальною вартістю серверів, скриньок і часу розробників."}},{"c":"ideas","id":"d-pmuwqu8ma-sales-1","data":{"createdAt":32,"persona":"pmuwqu8ma","source":"draft","team":"sales","text":"Volume tiers and committed-use discounts, so the cost per mailbox drops as they grow instead of pushing them to build their own.","text_uk":"Тарифи за обсягом і знижки за довгострокове зобов'язання, щоб ціна за скриньку падала з ростом клієнта, а не штовхала його будувати власне рішення."}},{"c":"ideas","id":"d-pmuwqu8ma-sales-2","data":{"createdAt":33,"persona":"pmuwqu8ma","source":"draft","team":"sales","text":"Quarterly business review for accounts paying over $2K: usage, results by provider, what to change next quarter.","text_uk":"Квартальний огляд для акаунтів, що платять понад $2K: використання, результати за провайдерами, що змінити в наступному кварталі."}}];
+  const POLL_MS = 20000;
+  const store = {personas:{},cells:{},ideas:{}};
+  const load = list => { for (const k in store) store[k] = {}; list.forEach(d => { (store[d.c] = store[d.c] || {})[d.id] = d.data; }); };
+  const fromServer = data => { for (const k in store) store[k] = Object.assign({}, (data && data[k]) || {}); };
+  load(SEED);
+  const subs = [];
+  const snap = (col, order) => {
+    let docs = Object.entries(store[col] || {}).map(([id, d]) => ({ id, exists: true, data: () => d, metadata: {} }));
+    docs.sort(order ? (a, b) => (a.data()[order] || 0) - (b.data()[order] || 0) : (a, b) => a.id < b.id ? -1 : 1);
+    return { docs, size: docs.length, empty: !docs.length, docChanges: () => [], metadata: {} };
+  };
+  const notify = () => subs.forEach(s => { try { s.fn(snap(s.col, s.order)); } catch (e) { console.error(e); } });
+  let sig = '';
+  async function pull(){
+    if (!API_URL) return false;
+    const r = await fetch(API_URL + (API_URL.includes('?') ? '&' : '?') + 't=' + Date.now());
+    const j = await r.json();
+    if (!j.ok) throw new Error('bad response');
+    const s = JSON.stringify(j.data);
+    const empty = !Object.values(j.data || {}).some(o => o && Object.keys(o).length);
+    if (empty) { await send({ op: 'seed', docs: SEED }); return pull(); }
+    if (s !== sig) { sig = s; fromServer(j.data); notify(); }
+    return true;
+  }
+  async function send(body){
+    const r = await fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) });
+    const j = await r.json();
+    if (!j.ok) { const e = new Error(j.code || 'error'); e.code = j.code === 'invalid' ? 'invalid_argument' : 'unavailable'; throw e; }
+    return j;
+  }
+  const write = async (op, c, id, data) => {
+    if (op === 'delete') delete store[c][id];
+    else if (op === 'update') store[c][id] = Object.assign({}, store[c][id] || {}, data);
+    else store[c][id] = data;
+    notify();
+    await send({ op, c, id, data });
+    sig = '';
+  };
+  const docRef = p => { const [c, id] = p.split('/'); return {
+    id, path: p,
+    get: async () => ({ id, exists: !!store[c][id], data: () => store[c][id] }),
+    set: d => write('set', c, id, d), update: d => write('update', c, id, d), delete: () => write('delete', c, id)
+  }; };
+  const colRef = c => ({
+    _order: null,
+    orderBy(f){ const q = Object.assign({}, this); q._order = f; return q; },
+    onSnapshot(fn){ const s = { col: c, order: this._order, fn }; subs.push(s); setTimeout(() => fn(snap(c, s.order)), 0); return () => { const i = subs.indexOf(s); if (i >= 0) subs.splice(i, 1); }; },
+    doc: id => docRef(c + '/' + (id || ('x' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6)))),
+    add: async d => { const id = 'i' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); await write('set', c, id, d); return docRef(c + '/' + id); }
+  });
+  const db = { collection: colRef, doc: docRef };
+  let connected = false;
+  const ready = (async () => {
+    if (!API_URL) { window.__cjmPreview = true; return; }
+    try { connected = await pull(); } catch (e) { console.warn('Team sheet unreachable', e); }
+    if (connected) setInterval(() => { if (!document.hidden) pull().catch(() => {}); }, POLL_MS);
+    else window.__cjmPreview = true;
+  })();
+  const user = { id: async () => '', can: async () => (await ready, connected), isOwner: () => false, canEdit: () => connected, profiles: async () => ({}) };
+  window.claude = { use: async n => { await ready; return n === 'db' ? db : n === 'user' ? user : null; } };
+})();
+</script>
+<script>
+/* ---------- i18n ---------- */
+const I18N={
+en:{
+ "nav.overview":"Overview","nav.personas":"Personas","nav.journey":"Journey map",
+ "hero.badge":"Customer journey map · draft",
+ "hero.h1":"Who we build Warmy for, and how every team can help it grow.",
+ "hero.lead":"We built this CJM to understand who our target audience is, how to attract them, how to keep them, and what to improve in the product so they stay with us. It also shows what each team needs to work on. Below are four working personas with team names, why each one cancels, and a journey map for each. Edit anything in place. Changes save for the whole team.",
+ "btn.personas":"See personas","btn.journey":"Open journey map",
+ "personas.h":"User personas",
+ "personas.p":'The name on each pill is how we refer to the persona inside the team. Client names are hidden (Company A, B…). Drafted from 15 churned paying accounts in HubSpot (top 5 by revenue per company size, pulled 6 Oct 2026). Value is what these companies paid Warmy in total: $ under $1K average, $$ $1–2K, $$$ over $2K. Goal colors: <span class="legend-i" style="color:var(--bad)"><span class="dot" style="background:var(--bad)"></span>red</span> for people who want one job done, <span class="legend-i" style="color:var(--violet)"><span class="dot" style="background:var(--violet)"></span>purple</span> for people who want to stay with us long-term. Share of users stays "?" until we have data for the full base.',
+ "journey.h":"Journey map",
+ "journey.p":"One map per persona. Pick a persona. Quotes come from cancel reasons and customer success notes in HubSpot.",
+ "caveat":'<b>Not reliable yet.</b> The "Paid Warmy" amounts in these tabs come from a small sample: 15 churned accounts, the top 5 by revenue in each company size. They can\'t describe the whole customer base. Treat them as a direction to check, not as facts, until we pull data for all 535 churned customers and for active ones.',
+ "teams.h":"What each team can do",
+ "teams.sub":"Proposals for {name} by team. Edit or remove any of them, or add your own idea under a team.",
+ "teams.none":"Add a persona to see team proposals.",
+ "foot":"Who We Build Warmy For · working draft for the team",
+ "hint":"Journey for {name}. Edit any box as new research comes in.",
+ "hint.none":"Add a persona to start their journey map.",
+ "hint.nodb":"The journey map loads from the shared board.",
+ "this.persona":"this persona","untitled":"Untitled","new.persona":"New persona",
+ "users":"Number of users:","users.tip":"Number of users in this persona. Not known yet: we need data for the whole customer base.",
+ "paid":"Paid Warmy:","paid.tip":"Approximate average each company in this persona paid Warmy in total. Based on 15 churned accounts, not reliable yet.",
+ "paid.tabtip":"Approximate average each company paid Warmy. Small sample, not reliable yet.",
+ "persona.name":"Persona name","goal":"Goal","churn.h":"Churn · draft","churn.l":"Why they cancel","churn.ph":"Main reasons they stop paying",
+ "oneoff":"One-off","longterm":"Long-term",
+ "add.persona":"+ Add persona","empty.personas":"No personas yet. Use Add new persona to start the journey map.",
+ "nodb":"This view can't reach the shared board. Open the page on claude.ai while signed in to see and edit the personas.",
+ "add.idea.l":"Add your idea","add.idea.ph":"What could {team} do for this persona?","add.idea.btn":"Add idea",
+ "draft":"Draft proposal","added.by":"Added by {name}","teammate":"a teammate","idea":"Idea","no.ideas":"",
+ "remove":"Remove","remove.q":"Remove this idea?","keep":"Keep",
+ "s.connecting":"Connecting to the shared board","s.idle":"Edits save automatically","s.saving":"Saving","s.saved":"All changes saved",
+ "s.err.save":"Couldn't save the last change. Check your connection and edit again.",
+ "s.readonly":"View only. Ask the owner for edit access to make changes.",
+ "s.err.persona":"Couldn't add the persona. Check your connection and try again.",
+ "s.err.idea":"Couldn't add the idea. Check your connection and try again.",
+ "s.err.remove":"Couldn't remove the idea. Try again.",
+ "s.lost":"Lost connection to the shared board. Reload the page.","s.unavailable":"Shared board unavailable",
+ "theme.dark":"Switch to dark theme","theme.light":"Switch to light theme","s.preview":"Preview only. Editing turns on once the team sheet is connected.","s.offline":"Can't reach the team sheet. Showing the last saved copy.",
+ "add.persona.btn":"Add new persona","m.title":"Add new persona","m.name":"Name","m.role":"Persona","m.size":"Size","m.segment":"Segment","m.goal":"Goal",
+ "m.intent":"What they want","m.notset":"Not sure yet","m.story":"User story","m.cancel":"Cancel","m.save":"Save persona","m.saving":"Saving…",
+ "m.ph.tag":"e.g. The Night Owl","m.ph.role":"Who they are, job title, company type","m.ph.size":"Company size, sending volume","m.ph.segment":"B2B or B2C, type of email",
+ "m.ph.goal":"What they want to achieve","m.ph.story":"As a …, I want …, so that …","m.ph.churn":"Main reasons they stop paying",
+ "m.err.name":"Add a name to save the persona.","m.err.save":"Couldn't save the persona. Check your connection and try again."
+},
+uk:{
+ "nav.overview":"Огляд","nav.personas":"Персони","nav.journey":"Карта шляху",
+ "hero.badge":"Карта шляху клієнта · чернетка",
+ "hero.h1":"Для кого ми будуємо Warmy і як кожна команда може допомогти йому рости.",
+ "hero.lead":"Ми склали цю CJM, щоб зрозуміти, хто наша цільова аудиторія, як її залучити, як утримати і що покращити в продукті, щоб клієнти залишалися з нами. Вона також показує, над чим має працювати кожна команда. Нижче чотири робочі персони з командними назвами, причини, чому кожна з них скасовує підписку, і карта шляху для кожної. Редагуйте будь-що прямо на сторінці. Зміни зберігаються для всієї команди.",
+ "btn.personas":"Переглянути персони","btn.journey":"Відкрити карту шляху",
+ "personas.h":"Персони користувачів",
+ "personas.p":'Назва на кожній плашці — це те, як ми називаємо персону всередині команди. Назви клієнтів приховано (Company A, B…). Складено на основі 15 платних клієнтів, що пішли, з HubSpot (по 5 найбільших за виручкою в кожному розмірі компанії, дані від 6 жовтня 2026). Цінність — це скільки ці компанії загалом заплатили Warmy: $ у середньому до $1K, $$ від $1K до $2K, $$$ понад $2K. Кольори мети: <span class="legend-i" style="color:var(--bad)"><span class="dot" style="background:var(--bad)"></span>червоний</span> для тих, хто хоче виконати одну задачу, <span class="legend-i" style="color:var(--violet)"><span class="dot" style="background:var(--violet)"></span>фіолетовий</span> для тих, хто хоче залишатися з нами надовго. Частка користувачів лишається «?», доки в нас немає даних по всій базі.',
+ "journey.h":"Карта шляху",
+ "journey.p":"Окрема карта для кожної персони. Оберіть персону. Цитати взято з причин скасування та нотаток customer success у HubSpot.",
+ "caveat":"<b>Поки що ненадійно.</b> Суми «Заплатили Warmy» у цих вкладках взято з невеликої вибірки: 15 клієнтів, що пішли, по 5 найбільших за виручкою в кожному розмірі компанії. Вони не описують усю клієнтську базу. Сприймайте їх як напрям для перевірки, а не як факти, доки ми не зберемо дані по всіх 535 клієнтах, що пішли, і по активних.",
+ "teams.h":"Що може зробити кожна команда",
+ "teams.sub":"Пропозиції для {name} за командами. Редагуйте чи видаляйте будь-яку з них або додайте свою ідею під потрібною командою.",
+ "teams.none":"Додайте персону, щоб побачити пропозиції для команд.",
+ "foot":"Who We Build Warmy For · робоча чернетка для команди",
+ "hint":"Шлях для {name}. Редагуйте будь-яку клітинку, коли з'являються нові дані.",
+ "hint.none":"Додайте персону, щоб почати її карту шляху.",
+ "hint.nodb":"Карта шляху завантажується зі спільної дошки.",
+ "this.persona":"цієї персони","untitled":"Без назви","new.persona":"Нова персона",
+ "users":"Кількість користувачів:","users.tip":"Кількість користувачів у цій персоні. Поки невідомо: потрібні дані по всій клієнтській базі.",
+ "paid":"Заплатили Warmy:","paid.tip":"Приблизна середня сума, яку кожна компанія цієї персони загалом заплатила Warmy. На основі 15 клієнтів, що пішли, поки ненадійно.",
+ "paid.tabtip":"Приблизна середня сума, яку заплатила кожна компанія. Невелика вибірка, поки ненадійно.",
+ "persona.name":"Назва персони","goal":"Мета","churn.h":"Відтік · чернетка","churn.l":"Чому скасовують","churn.ph":"Головні причини, чому перестають платити",
+ "oneoff":"Разово","longterm":"Надовго",
+ "add.persona":"+ Додати персону","empty.personas":"Персон ще немає. Натисніть «Додати персону», щоб почати карту шляху.",
+ "nodb":"Ця сторінка не може підключитися до спільної дошки. Відкрийте її на claude.ai, увійшовши в акаунт, щоб бачити й редагувати персони.",
+ "add.idea.l":"Додайте свою ідею","add.idea.ph":"Що може зробити {team} для цієї персони?","add.idea.btn":"Додати ідею",
+ "draft":"Чернетка пропозиції","added.by":"Автор: {name}","teammate":"колега","idea":"Ідея","no.ideas":"",
+ "remove":"Видалити","remove.q":"Видалити цю ідею?","keep":"Залишити",
+ "s.connecting":"Підключення до спільної дошки","s.idle":"Зміни зберігаються автоматично","s.saving":"Збереження","s.saved":"Усі зміни збережено",
+ "s.err.save":"Не вдалося зберегти останню зміну. Перевірте з'єднання й відредагуйте ще раз.",
+ "s.readonly":"Лише перегляд. Попросіть власника про доступ на редагування.",
+ "s.err.persona":"Не вдалося додати персону. Перевірте з'єднання й спробуйте ще раз.",
+ "s.err.idea":"Не вдалося додати ідею. Перевірте з'єднання й спробуйте ще раз.",
+ "s.err.remove":"Не вдалося видалити ідею. Спробуйте ще раз.",
+ "s.lost":"З'єднання зі спільною дошкою втрачено. Перезавантажте сторінку.","s.unavailable":"Спільна дошка недоступна",
+ "theme.dark":"Увімкнути темну тему","theme.light":"Увімкнути світлу тему","s.preview":"Лише перегляд. Редагування запрацює, щойно підключимо командну таблицю.","s.offline":"Немає зв'язку з командною таблицею. Показано останню збережену копію.",
+ "add.persona.btn":"Додати персону","m.title":"Нова персона","m.name":"Назва","m.role":"Персона","m.size":"Розмір","m.segment":"Сегмент","m.goal":"Мета",
+ "m.intent":"Чого вони хочуть","m.notset":"Ще не знаємо","m.story":"User story","m.cancel":"Скасувати","m.save":"Зберегти персону","m.saving":"Збереження…",
+ "m.ph.tag":"напр. The Night Owl","m.ph.role":"Хто вони: посада, тип компанії","m.ph.size":"Розмір компанії, обсяг розсилок","m.ph.segment":"B2B чи B2C, тип листів",
+ "m.ph.goal":"Чого вони хочуть досягти","m.ph.story":"Як …, я хочу …, щоб …","m.ph.churn":"Головні причини, чому перестають платити",
+ "m.err.name":"Додайте назву, щоб зберегти персону.","m.err.save":"Не вдалося зберегти персону. Перевірте з'єднання й спробуйте ще раз."
+}};
+let lang="en";
+try{const l=localStorage.getItem("cjm-lang");if(l==="uk"||l==="en")lang=l}catch(e){}
+const t=(k,vars)=>{let s=(I18N[lang]&&I18N[lang][k]!=null)?I18N[lang][k]:(I18N.en[k]??k);if(vars)for(const v in vars)s=s.split("{"+v+"}").join(vars[v]);return s};
+const N=o=>o[lang]||o.en;
+/* content fields: Ukrainian lives next to English as <field>_uk, falls back to the other language */
+const NOTR=new Set(["tag","sizeShort","value","paid","users","share"]);
+const fv=(o,k)=>{if(!o)return "";if(NOTR.has(k))return o[k]||"";return lang==="uk"?(o[k+"_uk"]||o[k]||""):(o[k]||o[k+"_uk"]||"")};
+const wk=k=>NOTR.has(k)||lang==="en"?k:k+"_uk";
+
+const STAGES=[
+  {id:"attraction",name:{en:"Attraction",uk:"Залучення"},hint:{en:"Hears about Warmy, compares options, visits the site",uk:"Дізнається про Warmy, порівнює варіанти, заходить на сайт"}},
+  {id:"activation",name:{en:"Activation",uk:"Активація"},hint:{en:"Signs up, connects the first mailbox, starts warm-up",uk:"Реєструється, підключає першу скриньку, запускає прогрів"}},
+  {id:"involvement",name:{en:"Involvement",uk:"Використання"},hint:{en:"Uses Warmy week to week, sees results",uk:"Користується Warmy щотижня, бачить результати"}},
+  {id:"retention",name:{en:"Retention",uk:"Утримання"},hint:{en:"Renews, upgrades, adds mailboxes, recommends",uk:"Продовжує, переходить на вищий план, додає скриньки, рекомендує"}}
+];
+const ROWS=[
+  {id:"goal",name:{en:"Goal",uk:"Мета"},ph:{en:"What do they want at this stage?",uk:"Чого вони хочуть на цьому етапі?"},c:"var(--sky)"},
+  {id:"thoughts",name:{en:"Thoughts and feelings",uk:"Думки й почуття"},ph:{en:"What are they thinking or feeling?",uk:"Що вони думають чи відчувають?"},c:"var(--amber)"},
+  {id:"problems",name:{en:"Problems",uk:"Проблеми"},ph:{en:"What gets in their way?",uk:"Що їм заважає?"},c:"var(--pink)"},
+  {id:"dropoff",name:{en:"Drop-off",uk:"Відтік"},ph:{en:"Do they leave here, and why?",uk:"Чи йдуть вони тут і чому?"},c:"var(--bad)"},
+  {id:"solution",name:{en:"Solution",uk:"Рішення"},ph:{en:"How can we help?",uk:"Як ми можемо допомогти?"},c:"var(--mint)"}
+];
+const PFIELDS=[
+  {id:"role",label:{en:"Persona",uk:"Персона"},ph:{en:"Who they are, job title, company type",uk:"Хто вони: посада, тип компанії"}},
+  {id:"size",label:{en:"Size",uk:"Розмір"},ph:{en:"Company size, sending volume",uk:"Розмір компанії, обсяг розсилок"}},
+  {id:"sizeShort",label:{en:"Company size · badge",uk:"Розмір компанії · бейдж"},ph:{en:"Short, e.g. 3–19 emp.",uk:"Коротко, напр. 3–19 emp."}},
+  {id:"value",label:{en:"Value to Warmy · badge",uk:"Цінність для Warmy · бейдж"},ph:{en:"What they pay us, e.g. $$ · avg $2.8K",uk:"Скільки платять, напр. $$ · avg $2.8K"}},
+  {id:"paid",label:{en:"Paid Warmy · badge",uk:"Заплатили Warmy · бейдж"},ph:{en:"Approximate average per company, e.g. ≈ $1.2K",uk:"Приблизне середнє на компанію, напр. ≈ $1.2K"}},
+  {id:"users",label:{en:"Number of users",uk:"Кількість користувачів"},ph:{en:"? Not known yet, e.g. 120",uk:"? Поки невідомо, напр. 120"}},
+  {id:"share",label:{en:"Share of our users",uk:"Частка наших користувачів"},ph:{en:"? Not known yet, e.g. 40% or 1,200 accounts",uk:"? Поки невідомо, напр. 40% або 1 200 акаунтів"}},
+  {id:"segment",label:{en:"Segment",uk:"Сегмент"},ph:{en:"B2B or B2C, type of email",uk:"B2B чи B2C, тип листів"}},
+  {id:"goal",label:{en:"Goal",uk:"Мета"},ph:{en:"What they want to achieve",uk:"Чого вони хочуть досягти"}},
+  {id:"story",label:{en:"User story",uk:"User story"},ph:{en:"As a …, I want …, so that …",uk:"Як …, я хочу …, щоб …"}}
+];
+const TEAMS=[
+  {id:"marketing",name:{en:"Marketing",uk:"Маркетинг"},stage:{en:"Attraction",uk:"Залучення"},note:{en:"Brings the right people to Warmy",uk:"Приводить у Warmy правильних людей"},c:"var(--sky)"},
+  {id:"sales",name:{en:"Sales",uk:"Продажі"},stage:{en:"Activation, often",uk:"Часто активація"},note:{en:"Turns interest into the right plan",uk:"Перетворює інтерес на правильний план"},c:"var(--amber)"},
+  {id:"cs",name:{en:"Customer Success",uk:"Customer Success"},stage:{en:"Retention",uk:"Утримання"},note:{en:"Keeps customers and wins them back",uk:"Утримує клієнтів і повертає їх"},c:"var(--mint)"},
+  {id:"dev",name:{en:"Development",uk:"Розробка"},stage:{en:"Every stage",uk:"Кожен етап"},note:{en:"Builds what the other teams need",uk:"Будує те, що потрібно іншим командам"},c:"var(--pink)"}
+];
+const DOTS=["var(--sky)","var(--mint)","var(--pink)","var(--amber)"];
+
+let db=null, userCap=null, myId=null, canWrite=true, personas=[], cells={}, current=null, ideas=[], names={};
+const $=s=>document.querySelector(s);
+const statusEl=$("#status"), statusText=$("#statusText");
+let statusKey="s.connecting";
+function setStatus(s,k){statusEl.dataset.s=s;statusKey=k;statusText.textContent=t(k)}
+
+/* theme toggle */
+let paintTheme=()=>{};
+(function(){
+  const root=document.documentElement,btn=$("#theme"),ic=$("#themeIc");
+  const moon='<path d="M20 14.5A8 8 0 019.5 4a8 8 0 1010.5 10.5z"/>',sun='<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>';
+  const isDark=()=>root.dataset.theme?root.dataset.theme==="dark":matchMedia("(prefers-color-scheme: dark)").matches;
+  paintTheme=()=>{const d=isDark();ic.innerHTML=d?sun:moon;btn.setAttribute("aria-label",t(d?"theme.light":"theme.dark"))};
+  try{const v=localStorage.getItem("cjm-theme");if(v)root.dataset.theme=v}catch(e){}
+  paintTheme();
+  btn.onclick=()=>{const v=isDark()?"light":"dark";root.dataset.theme=v;try{localStorage.setItem("cjm-theme",v)}catch(e){}paintTheme()};
+})();
+
+/* nav highlight */
+(function(){
+  const links=[...document.querySelectorAll(".nav a")];
+  const secs=links.map(a=>document.querySelector(a.getAttribute("href")));
+  const on=()=>{let i=0;secs.forEach((s,k)=>{if(s&&s.getBoundingClientRect().top<140)i=k});links.forEach((a,k)=>a.classList.toggle("on",k===i))};
+  addEventListener("scroll",on,{passive:true});
+})();
+
+/* language switch */
+function applyStatic(){
+  document.documentElement.lang=lang==="uk"?"uk":"en";
+  document.querySelectorAll("[data-i18n]").forEach(el=>{el.innerHTML=t(el.dataset.i18n)});
+  document.querySelectorAll(".lang button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.l===lang));
+  statusText.textContent=t(statusKey);paintTheme();
+  [["pm-tag","m.ph.tag"],["pm-role","m.ph.role"],["pm-size","m.ph.size"],["pm-segment","m.ph.segment"],["pm-goal","m.ph.goal"],["pm-story","m.ph.story"],["pm-churn","m.ph.churn"]].forEach(([id,k])=>{const el=document.getElementById(id);if(el)el.placeholder=t(k)});
+}
+document.querySelectorAll(".lang button").forEach(b=>b.addEventListener("click",()=>{
+  if(b.dataset.l===lang)return;
+  Object.keys(pending).forEach(flush);
+  lang=b.dataset.l;try{localStorage.setItem("cjm-lang",lang)}catch(e){}
+  applyStatic();
+  document.querySelectorAll(".pcard").forEach(c=>c.remove());
+  if(db){renderPersonas();renderTabs();renderGrid()}
+}));
+applyStatic();
+
+function autosize(el){el.style.height="auto";el.style.height=el.scrollHeight+"px"}
+function sync(el,val){val=val??"";if(el!==document.activeElement&&el.value!==val){el.value=val;if(el.tagName==="TEXTAREA")autosize(el)}}
+
+/* saving: one write at a time per document, coalesced per pause */
+const pending={},chains={};let inflight=0;
+function schedule(key,fn){clearTimeout(pending[key]?.t);pending[key]={fn,t:setTimeout(()=>flush(key),700)};setStatus("saving","s.saving")}
+function flush(key){const p=pending[key];if(!p)return;clearTimeout(p.t);delete pending[key];inflight++;
+  const ck=key.split(":").slice(0,3).join(":");
+  chains[ck]=(chains[ck]||Promise.resolve()).then(p.fn).then(()=>{inflight--;if(!inflight&&!Object.keys(pending).length)setStatus("saved","s.saved")},
+  e=>{inflight--;if(e&&e.code==="invalid_argument"){setReadOnly()}else setStatus("error","s.err.save")})}
+
+function setReadOnly(){canWrite=false;document.querySelectorAll("textarea,.pill input,.sel").forEach(el=>el.disabled=true);
+  document.querySelectorAll(".addp,.add,.acts,#addPersona").forEach(b=>b.hidden=true);setStatus("idle","s.readonly")}
+
+/* personas */
+function personaCard(p,i){
+  let card=document.querySelector(`.pcard[data-id="${p.id}"]`);
+  if(!card){
+    card=document.createElement("article");card.className="pcard";card.dataset.id=p.id;
+    card.innerHTML=`<div class="pill"><span class="dot"></span><span class="n"></span><input id="tag-${p.id}" aria-label="${t("persona.name")}" maxlength="40"><span class="users" title="${t("users.tip")}">${t("users")} <b></b></span><span class="users paid" title="${t("paid.tip")}">${t("paid")} <b></b></span></div>`+
+      PFIELDS.map(f=>f.id==="goal"?`<div class="field goal-f"><div class="goal-row"><label for="goal-${p.id}">${t("goal")}</label><span class="intent"></span></div><textarea id="goal-${p.id}" data-f="goal" rows="1" placeholder="${N(f.ph)}"></textarea></div>`:`<div class="field"><label for="${f.id}-${p.id}">${N(f.label)}</label><textarea id="${f.id}-${p.id}" data-f="${f.id}" rows="1" placeholder="${N(f.ph)}"></textarea></div>`).join("")+
+      `<div class="churn"><div class="churn-h"><span class="dot"></span>${t("churn.h")}</div>
+        <div class="field"><label for="churn-${p.id}">${t("churn.l")}</label><textarea id="churn-${p.id}" data-f="churn" rows="1" placeholder="${t("churn.ph")}"></textarea></div></div>`;
+    const tag=card.querySelector("input");
+    tag.addEventListener("input",()=>{schedule("p:"+p.id+":tag",()=>db.doc("personas/"+p.id).update({tag:tag.value}));renderTabs(true)});
+    tag.addEventListener("blur",()=>flush("p:"+p.id+":tag"));
+    card.querySelectorAll("textarea").forEach(ta=>{
+      ta.addEventListener("input",()=>{autosize(ta);const f=ta.dataset.f,key=wk(f),v=ta.value;
+        const pp=personas.find(x=>x.id===p.id);if(pp)pp[key]=v;
+        schedule("p:"+p.id+":"+key,()=>db.doc("personas/"+p.id).update({[key]:v}));
+        if(["share","sizeShort","value","paid"].includes(f))renderTabs(true);
+        if(f==="users")card.querySelector(".users b").textContent=v.trim()||"?";
+        if(f==="paid")card.querySelector(".paid b").textContent=v.trim()||"?"});
+      ta.addEventListener("blur",()=>flush("p:"+p.id+":"+wk(ta.dataset.f)));
+    });
+    if(!canWrite)card.querySelectorAll("textarea,input,select").forEach(el=>el.disabled=true);
+  }
+  card.querySelector(".dot").style.background=DOTS[i%DOTS.length];
+  card.querySelector(".n").textContent=i+1;
+  { const uf=card.querySelector('textarea[data-f="users"]');card.querySelector(".users b").textContent=(((uf&&uf===document.activeElement)?uf.value:p.users)||"").trim()||"?";
+    const pf=card.querySelector('textarea[data-f="paid"]');card.querySelector(".paid b").textContent=(((pf&&pf===document.activeElement)?pf.value:p.paid)||"").trim()||"?"; }
+  sync(card.querySelector("input"),p.tag);
+  card.querySelectorAll("textarea").forEach(ta=>sync(ta,fv(p,ta.dataset.f)));
+  paintIntent(card,p.intent||"");
+  return card;
+}
+function paintIntent(card,v){
+  const fld=card.querySelector(".goal-f");fld.classList.toggle("one-off",v==="one-off");fld.classList.toggle("long-term",v==="long-term");
+  card.querySelector(".intent").textContent=v==="one-off"?t("oneoff"):v==="long-term"?t("longterm"):"";
+}
+function renderPersonas(){
+  const box=$("#personas");
+  if(!personas.length){box.innerHTML=`<div class="empty">${t("empty.personas")}</div>`;return}
+  box.querySelectorAll(".skel,.empty").forEach(n=>n.remove());
+  const ids=new Set(personas.map(p=>p.id));
+  box.querySelectorAll(".pcard").forEach(c=>{if(!ids.has(c.dataset.id))c.remove()});
+  personas.forEach((p,i)=>box.appendChild(personaCard(p,i)));
+  box.querySelectorAll(".addp").forEach(n=>n.remove());
+  requestAnimationFrame(()=>box.querySelectorAll("textarea").forEach(autosize));
+}
+/* add persona: modal */
+const pModal=$("#pModal"),pForm=$("#pForm"),pmErr=$("#pmErr"),pmSave=$("#pmSave");
+let lastFocus=null;
+function openPersonaModal(){
+  if(!db||!canWrite)return;
+  pForm.reset();pmErr.hidden=true;pmSave.disabled=false;pmSave.textContent=t("m.save");
+  lastFocus=document.activeElement;pModal.hidden=false;document.body.style.overflow="hidden";
+  setTimeout(()=>$("#pm-tag").focus(),0);
+}
+function closePersonaModal(){pModal.hidden=true;document.body.style.overflow="";if(lastFocus&&lastFocus.focus)lastFocus.focus()}
+$("#addPersona").addEventListener("click",openPersonaModal);
+$("#pmCancel").addEventListener("click",closePersonaModal);
+$("#pm-tag").addEventListener("input",()=>{pmErr.hidden=true});
+pModal.addEventListener("mousedown",e=>{if(e.target===pModal)closePersonaModal()});
+pModal.addEventListener("keydown",e=>{
+  if(e.key==="Escape"){e.preventDefault();closePersonaModal();return}
+  if(e.key==="Tab"){const f=[...pForm.querySelectorAll("input,textarea,button")].filter(x=>!x.disabled&&x.offsetParent!==null);
+    if(!f.length)return;const first=f[0],last=f[f.length-1];
+    if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}
+});
+pForm.addEventListener("submit",async e=>{
+  e.preventDefault();
+  const v=id=>($("#"+id).value||"").trim();
+  const tag=v("pm-tag");
+  if(!tag){pmErr.textContent=t("m.err.name");pmErr.hidden=false;$("#pm-tag").focus();return}
+  pmErr.hidden=true;pmSave.disabled=true;pmSave.textContent=t("m.saving");setStatus("saving","s.saving");
+  const id="p"+Date.now().toString(36);const order=personas.reduce((m,p)=>Math.max(m,p.order||0),0)+1;
+  const doc={order,tag,intent:(pForm.querySelector('input[name="pm-intent"]:checked')||{}).value||"",sizeShort:"",value:"",paid:"",users:"",share:""};
+  ["role","size","segment","goal","story","churn"].forEach(k=>{doc[wk(k)]=v("pm-"+k)});
+  try{await db.doc("personas/"+id).set(doc);setStatus("saved","s.saved");current=id;closePersonaModal();renderTabs();renderGrid();
+    setTimeout(()=>{const c=document.querySelector(`.pcard[data-id="${id}"]`);if(c)c.scrollIntoView({behavior:"smooth",block:"nearest"})},150)}
+  catch(err){pmSave.disabled=false;pmSave.textContent=t("m.save");
+    if(err&&err.code==="invalid_argument"){closePersonaModal();setReadOnly()}else{pmErr.textContent=t("m.err.save");pmErr.hidden=false;setStatus("error","s.err.persona")}}
+});
+
+/* tabs + grid */
+function tabLabel(p){const inp=document.getElementById("tag-"+p.id);return (inp?inp.value:p.tag)||t("untitled")}
+function tabField(p,k){const inp=document.getElementById(k+"-"+p.id);return ((inp?inp.value:p[k])||"").trim()}
+function tabIntent(p){return p.intent==="one-off"?t("oneoff"):p.intent==="long-term"?t("longterm"):""}
+function paintTab(b,p){
+  b.querySelector(".nm").textContent=tabLabel(p);
+  const it=b.querySelector(".t-intent");it.className="t-intent "+(p.intent||"");it.textContent=tabIntent(p);
+  b.querySelector(".t-paid b").textContent=tabField(p,"paid")||"?";
+}
+function renderTabs(labelsOnly){
+  const tabs=$("#tabs");
+  if(labelsOnly){personas.forEach(p=>{const b=tabs.querySelector(`[data-id="${p.id}"]`);if(b)paintTab(b,p)});return}
+  tabs.innerHTML="";
+  personas.forEach(p=>{const b=document.createElement("button");b.type="button";b.className="tab";b.setAttribute("role","tab");b.dataset.id=p.id;
+    b.setAttribute("aria-selected",p.id===current);
+    b.innerHTML=`<span class="nm"></span><span class="t-intent"></span><span class="t-paid" title="${t("paid.tabtip")}">${t("paid")} <b></b></span>`;
+    paintTab(b,p);
+    b.onclick=()=>{current=p.id;renderTabs();renderGrid()};tabs.appendChild(b)});
+}
+function cellId(r,s){return `${current}__${s}__${r}`}
+function renderGrid(){
+  const g=$("#grid");g.innerHTML="";
+  if(!current){$("#cjmHint").textContent=t("hint.none");renderTeams();return}
+  const p=personas.find(x=>x.id===current);
+  $("#cjmHint").textContent=p?t("hint",{name:p.tag||t("this.persona")}):"";
+  g.insertAdjacentHTML("beforeend",`<div></div>`+STAGES.map(s=>`<div class="stage"><span class="pill">${N(s.name)}</span><small>${N(s.hint)}</small></div>`).join(""));
+  ROWS.forEach(r=>{
+    g.insertAdjacentHTML("beforeend",`<div class="rowlabel"><span class="dot" style="background:${r.c}"></span>${N(r.name)}</div>`);
+    STAGES.forEach(s=>{
+      const id=cellId(r.id,s.id);const wrap=document.createElement("div");wrap.className="cell "+r.id;
+      const ta=document.createElement("textarea");ta.id="c-"+id;ta.rows=3;ta.placeholder=N(r.ph);ta.setAttribute("aria-label",`${N(r.name)}, ${N(s.name)}`);
+      ta.value=fv(cells[id],"text");ta.disabled=!canWrite;const persona=current;
+      ta.addEventListener("input",()=>{autosize(ta);const key=wk("text"),v=ta.value;const existed=!!cells[id];
+        cells[id]={...(cells[id]||{persona,stage:s.id,row:r.id}),[key]:v};
+        schedule("c:"+id+":"+key,()=>existed?db.doc("cells/"+id).update({[key]:v}):db.doc("cells/"+id).set({persona,stage:s.id,row:r.id,[key]:v}))});
+      ta.addEventListener("blur",()=>flush("c:"+id+":"+wk("text")));
+      wrap.appendChild(ta);g.appendChild(wrap);
+    });
+  });
+  requestAnimationFrame(()=>g.querySelectorAll("textarea").forEach(autosize));
+  renderTeams();
+}
+
+/* team proposals + ideas */
+function renderTeams(){
+  const box=$("#teams");box.innerHTML="";
+  const p=personas.find(x=>x.id===current);
+  $("#teamsSub").textContent=p?t("teams.sub",{name:p.tag||t("this.persona")}):t("teams.none");
+  if(!p)return;
+  TEAMS.forEach(tm=>{
+    const col=document.createElement("div");col.className="team";col.dataset.team=tm.id;
+    col.innerHTML=`<div class="team-h"><b><span class="dot" style="background:${tm.c}"></span>${N(tm.name)}</b><span class="stage-chip">${N(tm.stage)}</span><small>${N(tm.note)}</small></div><ul class="ideas"></ul>
+      <div class="add"><label for="add-${tm.id}">${t("add.idea.l")}</label><textarea id="add-${tm.id}" rows="2" placeholder="${t("add.idea.ph",{team:N(tm.name)})}"></textarea><button class="btn primary" type="button" disabled>${t("add.idea.btn")}</button></div>`;
+    const ta=col.querySelector(".add textarea"),btn=col.querySelector(".add .btn");
+    ta.addEventListener("input",()=>{btn.disabled=!ta.value.trim()});
+    btn.addEventListener("click",async()=>{const text=ta.value.trim();if(!text||!db)return;btn.disabled=true;setStatus("saving","s.saving");
+      try{await db.collection("ideas").add({persona:current,team:tm.id,[wk("text")]:text,author:myId||"",createdAt:Date.now()});ta.value="";setStatus("saved","s.saved")}
+      catch(e){btn.disabled=false;e&&e.code==="invalid_argument"?setReadOnly():setStatus("error","s.err.idea")}});
+    if(!canWrite)col.querySelector(".add").hidden=true;
+    box.appendChild(col);
+  });
+  fillIdeas();
+}
+function fillIdeas(){
+  TEAMS.forEach(tm=>{
+    const ul=document.querySelector(`.team[data-team="${tm.id}"] .ideas`);if(!ul)return;
+    const mine=ideas.filter(i=>i.persona===current&&i.team===tm.id).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
+    const ids=new Set(mine.map(i=>i.id));
+    ul.querySelectorAll(".idea").forEach(li=>{if(!ids.has(li.dataset.id))li.remove()});
+    mine.forEach(i=>{
+      let li=ul.querySelector(`.idea[data-id="${i.id}"]`);
+      if(!li){
+        li=document.createElement("li");li.className="idea";li.dataset.id=i.id;
+        li.innerHTML=`<textarea rows="1" aria-label="${t("idea")}"></textarea><div class="idea-f"><span class="who"></span><span class="sp"></span><span class="acts"></span></div>`;
+        const ta=li.querySelector("textarea");ta.disabled=!canWrite;
+        ta.addEventListener("input",()=>{autosize(ta);const key=wk("text"),v=ta.value;const it=ideas.find(x=>x.id===i.id);if(it)it[key]=v;
+          schedule("i:"+i.id+":"+key,()=>db.doc("ideas/"+i.id).update({[key]:v}))});
+        ta.addEventListener("blur",()=>flush("i:"+i.id+":"+wk("text")));
+        const acts=li.querySelector(".acts");
+        const idle=()=>{acts.innerHTML=`<button class="lnk" type="button">${t("remove")}</button>`;acts.querySelector("button").onclick=ask;acts.hidden=!canWrite};
+        const ask=()=>{acts.innerHTML=`${t("remove.q")} <button class="lnk danger" type="button">${t("remove")}</button><button class="lnk" type="button">${t("keep")}</button>`;
+          const [yes,no]=acts.querySelectorAll("button");no.onclick=idle;
+          yes.onclick=async()=>{setStatus("saving","s.saving");try{await db.doc("ideas/"+i.id).delete();setStatus("saved","s.saved")}catch(e){idle();setStatus("error","s.err.remove")}}};
+        idle();
+      }
+      ul.appendChild(li);
+      sync(li.querySelector("textarea"),fv(i,"text"));
+      const who=li.querySelector(".who");
+      if(i.source==="draft")who.innerHTML=`<span class="dot"></span>${t("draft")}`;
+      else{who.innerHTML='<span class="dot" style="background:var(--good)"></span><span class="nm"></span>';who.querySelector(".nm").textContent=t("added.by",{name:(i.author&&names[i.author])||t("teammate")})}
+    });
+    requestAnimationFrame(()=>ul.querySelectorAll("textarea").forEach(autosize));
+  });
+}
+async function resolveNames(){
+  if(!userCap||!userCap.profiles)return;
+  const ids=[...new Set(ideas.map(i=>i.author).filter(Boolean))].filter(id=>!(id in names));
+  if(!ids.length)return;
+  try{const ps=await userCap.profiles(ids);ids.forEach(id=>{names[id]=(ps&&ps[id]&&ps[id].name)||""});fillIdeas()}catch(e){}
+}
+function fillGrid(){document.querySelectorAll("#grid textarea").forEach(ta=>sync(ta,fv(cells[ta.id.slice(2)],"text")))}
+
+/* boot */
+(async()=>{
+  const [d,user]=await Promise.all([window.claude?.use?.("db"),window.claude?.use?.("user")]);
+  db=d||null;userCap=user||null;
+  try{myId=user?await user.id():null}catch(e){}
+  if(!db){$("#addPersona").hidden=true;$("#personas").innerHTML=`<div class="empty">${t("nodb")}</div>`;
+    $("#cjmHint").textContent=t("hint.nodb");setStatus("error","s.unavailable");return}
+  try{if(user&&(await user.can("data.write"))===false)canWrite=false}catch(e){}
+  $("#addPersona").hidden=!canWrite;
+  setStatus("idle",canWrite?"s.idle":(window.__cjmPreview?"s.preview":"s.readonly"));
+  db.collection("personas").orderBy("order").onSnapshot(s=>{
+    personas=s.docs.map(x=>({id:x.id,...x.data()}));
+    const had=current;if(!personas.some(p=>p.id===current))current=personas[0]?.id||null;
+    renderPersonas();renderTabs();if(had!==current||!$("#grid").children.length)renderGrid();
+  },()=>setStatus("error","s.lost"));
+  db.collection("ideas").onSnapshot(s=>{ideas=s.docs.map(x=>({id:x.id,...x.data()}));fillIdeas();resolveNames()},
+    ()=>setStatus("error","s.lost"));
+  db.collection("cells").onSnapshot(s=>{cells={};s.docs.forEach(x=>{cells[x.id]=x.data()});fillGrid()},
+    ()=>setStatus("error","s.lost"));
+})();
+</script>
+
+</body>
+</html>
