@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://script.google.com">
+<link rel="preconnect" href="https://script.googleusercontent.com">
 <style>:root{box-sizing:border-box}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Who We Build Warmy For</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,18 +14,18 @@
 /* Layout: Warmy DS v1 look — top pill nav, centered hero, persona cards row, persona-switched journey grid. Warm cream canvas, charcoal ink, Figtree, pill controls, colored dots. */
 :root{
   --bg:oklch(0.985 0.007 85); --surface:oklch(1 0 0); --beige:oklch(0.955 0.013 80); --line:oklch(0.91 0.014 80);
-  --ink:oklch(0.21 0.02 265); --muted:oklch(0.3 0.03 60); --on-ink:oklch(1 0 0);
+  --ink:oklch(0.21 0.02 265); --muted:oklch(0.3 0.03 60); --on-ink:oklch(1 0 0); --strong:oklch(0 0 0);
   --sky:oklch(0.76 0.11 230); --mint:oklch(0.74 0.12 165); --pink:oklch(0.77 0.12 355); --amber:oklch(0.8 0.12 75);
   --good:oklch(0.52 0.11 160); --good-soft:oklch(0.95 0.04 160); --bad:oklch(0.55 0.17 15); --violet:oklch(0.52 0.19 295);
   --font:"Figtree",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:oklch(0.17 0.012 265); --surface:oklch(0.215 0.014 265); --beige:oklch(0.27 0.014 265); --line:oklch(0.31 0.014 265);
-  --ink:oklch(0.96 0.01 85); --muted:oklch(0.88 0.015 80); --on-ink:oklch(0.17 0.012 265);
+  --ink:oklch(0.96 0.01 85); --muted:oklch(0.88 0.015 80); --on-ink:oklch(0.17 0.012 265); --strong:oklch(1 0 0);
   --good:oklch(0.8 0.12 160); --good-soft:oklch(0.3 0.05 160); --bad:oklch(0.76 0.14 15); --violet:oklch(0.78 0.13 295); color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:oklch(0.17 0.012 265); --surface:oklch(0.215 0.014 265); --beige:oklch(0.27 0.014 265); --line:oklch(0.31 0.014 265);
-  --ink:oklch(0.96 0.01 85); --muted:oklch(0.88 0.015 80); --on-ink:oklch(0.17 0.012 265);
+  --ink:oklch(0.96 0.01 85); --muted:oklch(0.88 0.015 80); --on-ink:oklch(0.17 0.012 265); --strong:oklch(1 0 0);
   --good:oklch(0.8 0.12 160); --good-soft:oklch(0.3 0.05 160); --bad:oklch(0.76 0.14 15); --violet:oklch(0.78 0.13 295); color-scheme:dark}
 
 *{box-sizing:border-box}
@@ -36,8 +38,9 @@ button{font:inherit;color:inherit;cursor:pointer}
 .nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in oklch,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .nav-in{max-width:1200px;margin:0 auto;padding-inline:16px;padding-block:8px;display:flex;align-items:center;gap:4px}
 .nav a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;white-space:nowrap}
-.nav a:hover{color:var(--ink)}
-.nav a.on{background:var(--beige);color:var(--ink)}
+.nav a:hover{color:var(--strong)}
+.nav a.on{background:transparent;color:var(--ink);font-weight:700}
+.nav a.on:hover{color:var(--strong)}
 .nav .sp{flex:1}
 .icon-btn{width:34px;height:34px;border-radius:999px;border:0;background:transparent;display:grid;place-items:center;color:var(--muted)}
 .icon-btn:hover{background:var(--beige);color:var(--ink)}
@@ -75,15 +78,21 @@ h1{margin:0;font-size:clamp(30px,4.6vw,46px);font-weight:700;letter-spacing:-.02
 @media (max-width:640px){.personas{grid-template-columns:minmax(0,1fr)}}
 .pcard{padding:16px}
 .pcard{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:14px;min-width:0}
+/* line up the same field across cards: each card spans 7 shared rows (pill, 5 fields, churn) */
+@supports (grid-template-rows:subgrid){
+  .personas{row-gap:14px}
+  .pcard{display:grid;grid-row:span 7;grid-template-rows:subgrid;row-gap:14px;align-content:start}
+}
 .pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:14px;font-weight:600;background:var(--surface);max-width:100%}
 .pill .n{color:var(--muted);font-variant-numeric:tabular-nums;font-weight:500}
 .pill input{all:unset;min-width:4ch;width:100%;font:inherit;color:inherit}
-.pcard>.pill{width:100%;flex-wrap:wrap;row-gap:6px;border-radius:18px}
+.pcard>.pill{width:100%;flex-wrap:wrap;row-gap:6px;border-radius:18px;padding:10px 14px;background:linear-gradient(135deg,color-mix(in oklch,var(--pc,var(--sky)) 30%,transparent),color-mix(in oklch,var(--pc,var(--sky)) 6%,transparent));border-color:color-mix(in oklch,var(--pc,var(--sky)) 35%,transparent)}
+.pcard>.pill .users{background:color-mix(in oklch,var(--surface) 72%,transparent);color:var(--ink)}
 .pcard>.pill input{flex:1 1 9ch;width:auto}
 .field.goal-f{border-radius:12px;padding:8px 10px 6px;margin:0 -10px;border:1px solid transparent}
 .field.goal-f textarea{margin:0;width:100%;padding:2px 0;border:0;background:transparent!important}
 .field.one-off{--ic:var(--bad)} .field.long-term{--ic:var(--violet)}
-.field.one-off,.field.long-term{background:color-mix(in oklch,var(--ic) 9%,var(--surface));border-color:color-mix(in oklch,var(--ic) 35%,var(--line))}
+.field.one-off,.field.long-term{background:color-mix(in oklch,var(--ic) 9%,var(--surface));border-color:transparent}
 .field.one-off label,.field.long-term label{color:var(--ic)}
 .field.one-off textarea,.field.long-term textarea{color:color-mix(in oklch,var(--ic) 70%,var(--ink));font-weight:600}
 .goal-row{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
@@ -124,9 +133,12 @@ textarea:disabled{cursor:default}
 .scroller{overflow-x:auto;margin:-4px;padding:4px}
 .grid{display:grid;grid-template-columns:140px repeat(4,minmax(190px,1fr));gap:12px;min-width:920px}
 .stage{display:flex;flex-direction:column;gap:6px;position:relative;padding-bottom:4px}
-.stage .pill{align-self:flex-start;font-size:13.5px;padding:4px 12px}
+.stage .pill{align-self:flex-start;font-size:13.5px;padding:4px 12px;background:color-mix(in oklch,var(--beige),var(--ink) 9%);border-color:transparent}
 .stage small{color:var(--muted);font-size:12.5px;line-height:1.4}
-.stage:not(:last-child)::after{content:"";position:absolute;top:15px;left:calc(100% - 2px);width:14px;border-top:2px dotted var(--line)}
+.stage-top{display:flex;align-items:center;margin-right:-12px}
+.stage-top .conn{flex:1;min-width:12px;margin:0 6px;border-top:2px dashed color-mix(in oklch,var(--ink) 28%,transparent)}
+.stage.last .stage-top{margin-right:0}
+.stage.last .conn{display:none}
 .rowlabel{font-weight:600;font-size:14.5px;padding-top:10px;display:flex;align-items:flex-start;gap:8px}
 .rowlabel .dot{margin-top:7px}
 .cell{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:10px 12px;min-width:0;display:flex}
@@ -134,9 +146,9 @@ textarea:disabled{cursor:default}
 .cell textarea{margin:0;width:100%;padding:0;border:0;min-height:80px;font-size:14px;background:transparent!important}
 .cell.problems textarea{color:var(--bad)}
 .cell.solution textarea{color:var(--good)}
-.caveat{display:flex;gap:12px;align-items:flex-start;background:color-mix(in oklch,var(--amber) 14%,var(--surface));border:1px solid color-mix(in oklch,var(--amber) 45%,var(--line));border-radius:14px;padding:12px 16px;margin:-6px 0 18px}
+.caveat{display:flex;gap:12px;align-items:flex-start;background:color-mix(in oklch,var(--amber) 14%,var(--surface));border:0;border-radius:14px;padding:12px 16px;margin:-6px 0 18px}
 .caveat p{margin:0;font-size:13.5px;line-height:1.5;max-width:90ch}
-.caveat-ic{flex:none;width:20px;height:20px;border-radius:50%;background:var(--amber);color:oklch(0.25 0.03 70);display:grid;place-items:center;font-weight:800;font-size:12px;margin-top:1px}
+.caveat-ic{flex:none;width:20px;height:20px;border-radius:50%;background:var(--bad);color:var(--surface);display:grid;place-items:center;font-weight:800;font-size:12px;margin-top:1px}
 .teams-h{margin:36px 0 16px}
 .teams-h h3{margin:0;font-size:19px;font-weight:700;letter-spacing:-.01em}
 .teams-h p{margin:4px 0 0;color:var(--muted);max-width:70ch}
@@ -231,7 +243,7 @@ textarea:disabled{cursor:default}
 
 <main class="wrap" id="top">
   <header class="hero">
-    <span class="badge"><span class="dot"></span><span data-i18n="hero.badge">Customer journey map · draft</span></span>
+    <span class="badge"><span class="dot"></span><span data-i18n="hero.badge">Customer journey map</span></span>
     <h1 data-i18n="hero.h1">Who we build Warmy for, and how every team can help it grow.</h1>
     <p class="lead" data-i18n="hero.lead">We built this CJM to understand who our target audience is, how to attract them, how to keep them, and what to improve in the product so they stay with us.</p>
     <div class="btns">
@@ -304,6 +316,8 @@ textarea:disabled{cursor:default}
   const load = list => { for (const k in store) store[k] = {}; list.forEach(d => { (store[d.c] = store[d.c] || {})[d.id] = d.data; }); };
   const fromServer = data => { for (const k in store) store[k] = Object.assign({}, (data && data[k]) || {}); };
   load(SEED);
+  const CACHE_KEY = 'cjm-cache-v1';
+  try { const c = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null'); if (c && c.personas && Object.keys(c.personas).length) fromServer(c); } catch (e) {}
   const subs = [];
   const snap = (col, order) => {
     let docs = Object.entries(store[col] || {}).map(([id, d]) => ({ id, exists: true, data: () => d, metadata: {} }));
@@ -320,7 +334,7 @@ textarea:disabled{cursor:default}
     const s = JSON.stringify(j.data);
     const empty = !Object.values(j.data || {}).some(o => o && Object.keys(o).length);
     if (empty) { await send({ op: 'seed', docs: SEED }); return pull(); }
-    if (s !== sig) { sig = s; fromServer(j.data); notify(); }
+    if (s !== sig) { sig = s; fromServer(j.data); notify(); try { localStorage.setItem(CACHE_KEY, s); } catch (e) {} }
     return true;
   }
   async function send(body){
@@ -350,15 +364,15 @@ textarea:disabled{cursor:default}
     add: async d => { const id = 'i' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); await write('set', c, id, d); return docRef(c + '/' + id); }
   });
   const db = { collection: colRef, doc: docRef };
-  let connected = false;
-  const ready = (async () => {
-    if (!API_URL) { window.__cjmPreview = true; return; }
-    try { connected = await pull(); } catch (e) { console.warn('Team sheet unreachable', e); }
-    if (connected) setInterval(() => { if (!document.hidden) pull().catch(() => {}); }, POLL_MS);
-    else window.__cjmPreview = true;
-  })();
-  const user = { id: async () => '', can: async () => (await ready, connected), isOwner: () => false, canEdit: () => connected, profiles: async () => ({}) };
-  window.claude = { use: async n => { await ready; return n === 'db' ? db : n === 'user' ? user : null; } };
+  const connected = !!API_URL;
+  if (!connected) window.__cjmPreview = true;
+  else {
+    pull().catch(e => console.warn('Team sheet unreachable, showing the saved copy', e));
+    setInterval(() => { if (!document.hidden) pull().catch(() => {}); }, POLL_MS);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) pull().catch(() => {}); });
+  }
+  const user = { id: async () => '', can: async () => connected, isOwner: () => false, canEdit: () => connected, profiles: async () => ({}) };
+  window.claude = { use: async n => n === 'db' ? db : n === 'user' ? user : null };
 })();
 </script>
 <script>
@@ -366,7 +380,7 @@ textarea:disabled{cursor:default}
 const I18N={
 en:{
  "nav.overview":"Overview","nav.personas":"Personas","nav.journey":"Journey map",
- "hero.badge":"Customer journey map · draft",
+ "hero.badge":"Customer journey map",
  "hero.h1":"Who we build Warmy for, and how every team can help it grow.",
  "hero.lead":"We built this CJM to understand who our target audience is, how to attract them, how to keep them, and what to improve in the product so they stay with us. It also shows what each team needs to work on. Below are four working personas with team names, why each one cancels, and a journey map for each. Edit anything in place. Changes save for the whole team.",
  "btn.personas":"See personas","btn.journey":"Open journey map",
@@ -409,7 +423,7 @@ en:{
 },
 uk:{
  "nav.overview":"Огляд","nav.personas":"Персони","nav.journey":"Карта шляху",
- "hero.badge":"Карта шляху клієнта · чернетка",
+ "hero.badge":"Карта шляху клієнта",
  "hero.h1":"Для кого ми будуємо Warmy і як кожна команда може допомогти йому рости.",
  "hero.lead":"Ми склали цю CJM, щоб зрозуміти, хто наша цільова аудиторія, як її залучити, як утримати і що покращити в продукті, щоб клієнти залишалися з нами. Вона також показує, над чим має працювати кожна команда. Нижче чотири робочі персони з командними назвами, причини, чому кожна з них скасовує підписку, і карта шляху для кожної. Редагуйте будь-що прямо на сторінці. Зміни зберігаються для всієї команди.",
  "btn.personas":"Переглянути персони","btn.journey":"Відкрити карту шляху",
@@ -550,7 +564,7 @@ function personaCard(p,i){
   let card=document.querySelector(`.pcard[data-id="${p.id}"]`);
   if(!card){
     card=document.createElement("article");card.className="pcard";card.dataset.id=p.id;
-    card.innerHTML=`<div class="pill"><span class="dot"></span><span class="n"></span><input id="tag-${p.id}" aria-label="${t("persona.name")}" maxlength="40"><span class="users" title="${t("users.tip")}">${t("users")} <b></b></span><span class="users paid" title="${t("paid.tip")}">${t("paid")} <b></b></span></div>`+
+    card.innerHTML=`<div class="pill"><input id="tag-${p.id}" aria-label="${t("persona.name")}" maxlength="40"><span class="users" title="${t("users.tip")}">${t("users")} <b></b></span><span class="users paid" title="${t("paid.tip")}">${t("paid")} <b></b></span></div>`+
       PFIELDS.map(f=>f.id==="goal"?`<div class="field goal-f"><div class="goal-row"><label for="goal-${p.id}">${t("goal")}</label><span class="intent"></span></div><textarea id="goal-${p.id}" data-f="goal" rows="1" placeholder="${N(f.ph)}"></textarea></div>`:`<div class="field"><label for="${f.id}-${p.id}">${N(f.label)}</label><textarea id="${f.id}-${p.id}" data-f="${f.id}" rows="1" placeholder="${N(f.ph)}"></textarea></div>`).join("")+
       `<div class="churn"><div class="churn-h"><span class="dot"></span>${t("churn.h")}</div>
         <div class="field"><label for="churn-${p.id}">${t("churn.l")}</label><textarea id="churn-${p.id}" data-f="churn" rows="1" placeholder="${t("churn.ph")}"></textarea></div></div>`;
@@ -568,9 +582,8 @@ function personaCard(p,i){
     });
     if(!canWrite)card.querySelectorAll("textarea,input,select").forEach(el=>el.disabled=true);
   }
-  card.querySelector(".dot").style.background=DOTS[i%DOTS.length];
-  card.querySelector(".n").textContent=i+1;
-  { const uf=card.querySelector('textarea[data-f="users"]');card.querySelector(".users b").textContent=(((uf&&uf===document.activeElement)?uf.value:p.users)||"").trim()||"?";
+  card.style.setProperty("--pc",DOTS[i%DOTS.length]);
+    { const uf=card.querySelector('textarea[data-f="users"]');card.querySelector(".users b").textContent=(((uf&&uf===document.activeElement)?uf.value:p.users)||"").trim()||"?";
     const pf=card.querySelector('textarea[data-f="paid"]');card.querySelector(".paid b").textContent=(((pf&&pf===document.activeElement)?pf.value:p.paid)||"").trim()||"?"; }
   sync(card.querySelector("input"),p.tag);
   card.querySelectorAll("textarea").forEach(ta=>sync(ta,fv(p,ta.dataset.f)));
@@ -651,7 +664,7 @@ function renderGrid(){
   if(!current){$("#cjmHint").textContent=t("hint.none");renderTeams();return}
   const p=personas.find(x=>x.id===current);
   $("#cjmHint").textContent=p?t("hint",{name:p.tag||t("this.persona")}):"";
-  g.insertAdjacentHTML("beforeend",`<div></div>`+STAGES.map(s=>`<div class="stage"><span class="pill">${N(s.name)}</span><small>${N(s.hint)}</small></div>`).join(""));
+  g.insertAdjacentHTML("beforeend",`<div></div>`+STAGES.map((s,k)=>`<div class="stage${k===STAGES.length-1?" last":""}"><div class="stage-top"><span class="pill">${N(s.name)}</span><span class="conn" aria-hidden="true"></span></div><small>${N(s.hint)}</small></div>`).join(""));
   ROWS.forEach(r=>{
     g.insertAdjacentHTML("beforeend",`<div class="rowlabel"><span class="dot" style="background:${r.c}"></span>${N(r.name)}</div>`);
     STAGES.forEach(s=>{
