@@ -107,8 +107,9 @@ textarea:disabled{cursor:default}
 .skel{height:300px;border-radius:20px;background:var(--beige)}
 
 /* journey */
-.tabs{display:inline-flex;flex-wrap:wrap;gap:2px;padding:4px;background:var(--beige);border:1px solid var(--line);border-radius:22px;max-width:100%}
-.tab{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;padding:7px 14px;border-radius:999px;border:0;background:transparent;color:var(--muted);white-space:nowrap}
+.tabs{display:flex;flex-wrap:nowrap;gap:4px;padding:4px;background:var(--beige);border:1px solid var(--line);border-radius:20px;width:100%;overflow-x:auto;margin-bottom:18px;scrollbar-width:thin}
+.tab{flex:1 1 0;min-width:180px;display:flex;flex-direction:column;align-items:flex-start;gap:5px;font-size:14px;font-weight:500;padding:9px 14px;border-radius:16px;border:0;background:transparent;color:var(--muted);white-space:nowrap;text-align:left}
+.t-meta{display:flex;align-items:center;gap:6px}
 .tab:hover{color:var(--ink)}
 .tab[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px color-mix(in oklch,var(--ink) 10%,transparent),0 0 0 1px var(--line)}
 .tab .nm{font-weight:600}
@@ -251,9 +252,9 @@ textarea:disabled{cursor:default}
   <section class="sec" id="journey" aria-labelledby="jh">
     <div class="sec-h">
       <div><h2 id="jh" data-i18n="journey.h">Journey map</h2><p data-i18n="journey.p"></p></div>
-      <div class="tabs" id="tabs" role="tablist" aria-label="Persona"></div>
     </div>
     <div class="caveat" role="note"><span class="caveat-ic" aria-hidden="true">!</span><p data-i18n="caveat"></p></div>
+    <div class="tabs" id="tabs" role="tablist" aria-label="Persona"></div>
     <div class="board">
       <div class="scroller"><div class="grid" id="grid"></div></div>
     </div>
@@ -373,7 +374,7 @@ en:{
  "personas.p":'Drafted from 15 paying customers. Client names are hidden (Company A, B…). Value is what these companies paid Warmy in total.',
  "journey.h":"Journey map",
  "journey.p":"One map per persona. Pick a persona. Quotes come from cancel reasons and customer success notes in HubSpot.",
- "caveat":'<b>Not reliable yet.</b> The "Paid Warmy" amounts in these tabs come from a small sample: 15 churned accounts, the top 5 by revenue in each company size. They can\'t describe the whole customer base. Treat them as a direction to check, not as facts, until we pull data for all 535 churned customers and for active ones.',
+ "caveat":'The "Paid Warmy" amounts in these tabs come from a small sample: 15 churned accounts, the top 5 by revenue in each company size. They can\'t describe the whole customer base. Treat them as a direction to check.',
  "teams.h":"What each team can do",
  "teams.sub":"Proposals for {name} by team. Edit or remove any of them, or add your own idea under a team.",
  "teams.none":"Add a persona to see team proposals.",
@@ -416,7 +417,7 @@ uk:{
  "personas.p":'Складено на основі 15 платних клієнтів. Назви клієнтів приховано (Company A, B…). Цінність — це скільки ці компанії загалом заплатили Warmy.',
  "journey.h":"Карта шляху",
  "journey.p":"Окрема карта для кожної персони. Оберіть персону. Цитати взято з причин скасування та нотаток customer success у HubSpot.",
- "caveat":"<b>Поки що ненадійно.</b> Суми «Цінність для Warmy» у цих вкладках взято з невеликої вибірки: 15 клієнтів, що пішли, по 5 найбільших за виручкою в кожному розмірі компанії. Вони не описують усю клієнтську базу. Сприймайте їх як напрям для перевірки, а не як факти, доки ми не зберемо дані по всіх 535 клієнтах, що пішли, і по активних.",
+ "caveat":"Суми «Цінність для Warmy» у цих вкладках взято з невеликої вибірки: 15 клієнтів, що пішли, по 5 найбільших за виручкою в кожному розмірі компанії. Вони не описують усю клієнтську базу. Сприймайте їх як напрям для перевірки.",
  "teams.h":"Що може зробити кожна команда",
  "teams.sub":"Пропозиції для {name} за командами. Редагуйте чи видаляйте будь-яку з них або додайте свою ідею під потрібною командою.",
  "teams.none":"Додайте персону, щоб побачити пропозиції для команд.",
@@ -645,7 +646,7 @@ function renderTabs(labelsOnly){
   tabs.innerHTML="";
   personas.forEach(p=>{const b=document.createElement("button");b.type="button";b.className="tab";b.setAttribute("role","tab");b.dataset.id=p.id;
     b.setAttribute("aria-selected",p.id===current);
-    b.innerHTML=`<span class="nm"></span><span class="t-intent"></span><span class="t-paid" title="${t("paid.tabtip")}">${t("paid.tab")} <b></b></span>`;
+    b.innerHTML=`<span class="nm"></span><span class="t-meta"><span class="t-intent"></span><span class="t-paid" title="${t("paid.tabtip")}">${t("paid.tab")} <b></b></span></span>`;
     paintTab(b,p);
     b.onclick=()=>{current=p.id;renderTabs();renderGrid()};tabs.appendChild(b)});
 }
