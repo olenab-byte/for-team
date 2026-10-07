@@ -59,6 +59,9 @@ h1{margin:0;font-size:clamp(30px,4.6vw,46px);font-weight:700;letter-spacing:-.02
 .status{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:13px;color:var(--muted);background:var(--surface)}
 .status[data-s="saved"] .dot{background:var(--good)} .status[data-s="saving"] .dot{background:var(--sky)} .status[data-s="error"] .dot{background:var(--bad)}
 .status[data-s="error"]{color:var(--bad)}
+/* status pill stays hidden; it appears only when a save fails */
+.status{display:none}
+.status[data-s="error"]{display:inline-flex}
 
 /* section heads */
 .sec{padding-block:40px}
@@ -112,9 +115,9 @@ textarea:disabled{cursor:default}
 .t-intent{font-size:11.5px;font-weight:700;border-radius:999px;padding:1px 8px;color:color-mix(in oklch,var(--ic) 75%,var(--ink));background:color-mix(in oklch,var(--ic) 13%,transparent)}
 .t-intent.one-off{--ic:var(--bad)} .t-intent.long-term{--ic:var(--violet)}
 .t-intent:empty{display:none}
-.t-paid{font-size:12px;font-weight:500;font-variant-numeric:tabular-nums;color:var(--muted)}
+.t-paid{font-size:11.5px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--muted);border-radius:999px;padding:1px 8px;background:color-mix(in oklch,var(--ink) 8%,transparent)}
 .t-paid b{font-weight:700;color:inherit}
-.tab[aria-selected="true"] .t-paid{color:var(--ink)}
+.tab[aria-selected="true"] .t-paid{color:var(--ink);background:var(--beige)}
 .t-paid::after{content:"*";opacity:.6;margin-left:1px}
 .board{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px}
 .scroller{overflow-x:auto;margin:-4px;padding:4px}
@@ -367,7 +370,7 @@ en:{
  "hero.lead":"We built this CJM to understand who our target audience is, how to attract them, how to keep them, and what to improve in the product so they stay with us. It also shows what each team needs to work on. Below are four working personas with team names, why each one cancels, and a journey map for each. Edit anything in place. Changes save for the whole team.",
  "btn.personas":"See personas","btn.journey":"Open journey map",
  "personas.h":"User personas",
- "personas.p":'The name on each pill is how we refer to the persona inside the team. Client names are hidden (Company A, B…). Drafted from 15 churned paying accounts in HubSpot (top 5 by revenue per company size, pulled 6 Oct 2026). Value is what these companies paid Warmy in total: $ under $1K average, $$ $1–2K, $$$ over $2K. Goal colors: <span class="legend-i" style="color:var(--bad)"><span class="dot" style="background:var(--bad)"></span>red</span> for people who want one job done, <span class="legend-i" style="color:var(--violet)"><span class="dot" style="background:var(--violet)"></span>purple</span> for people who want to stay with us long-term. Share of users stays "?" until we have data for the full base.',
+ "personas.p":'Drafted from 15 paying customers. Client names are hidden (Company A, B…). Value is what these companies paid Warmy in total.',
  "journey.h":"Journey map",
  "journey.p":"One map per persona. Pick a persona. Quotes come from cancel reasons and customer success notes in HubSpot.",
  "caveat":'<b>Not reliable yet.</b> The "Paid Warmy" amounts in these tabs come from a small sample: 15 churned accounts, the top 5 by revenue in each company size. They can\'t describe the whole customer base. Treat them as a direction to check, not as facts, until we pull data for all 535 churned customers and for active ones.',
@@ -381,7 +384,7 @@ en:{
  "this.persona":"this persona","untitled":"Untitled","new.persona":"New persona",
  "users":"Number of users:","users.tip":"Number of users in this persona. Not known yet: we need data for the whole customer base.",
  "paid":"Paid Warmy:","paid.tip":"Approximate average each company in this persona paid Warmy in total. Based on 15 churned accounts, not reliable yet.",
- "paid.tabtip":"Approximate average each company paid Warmy. Small sample, not reliable yet.",
+ "paid.tabtip":"Approximate average each company paid Warmy. Small sample, not reliable yet.","paid.tab":"Value:",
  "persona.name":"Persona name","goal":"Goal","churn.h":"Churn · draft","churn.l":"Why they cancel","churn.ph":"Main reasons they stop paying",
  "oneoff":"One-off","longterm":"Long-term",
  "add.persona":"+ Add persona","empty.personas":"No personas yet. Use Add new persona to start the journey map.",
@@ -410,10 +413,10 @@ uk:{
  "hero.lead":"Ми склали цю CJM, щоб зрозуміти, хто наша цільова аудиторія, як її залучити, як утримати і що покращити в продукті, щоб клієнти залишалися з нами. Вона також показує, над чим має працювати кожна команда. Нижче чотири робочі персони з командними назвами, причини, чому кожна з них скасовує підписку, і карта шляху для кожної. Редагуйте будь-що прямо на сторінці. Зміни зберігаються для всієї команди.",
  "btn.personas":"Переглянути персони","btn.journey":"Відкрити карту шляху",
  "personas.h":"Персони користувачів",
- "personas.p":'Назва на кожній плашці — це те, як ми називаємо персону всередині команди. Назви клієнтів приховано (Company A, B…). Складено на основі 15 платних клієнтів, що пішли, з HubSpot (по 5 найбільших за виручкою в кожному розмірі компанії, дані від 6 жовтня 2026). Цінність — це скільки ці компанії загалом заплатили Warmy: $ у середньому до $1K, $$ від $1K до $2K, $$$ понад $2K. Кольори мети: <span class="legend-i" style="color:var(--bad)"><span class="dot" style="background:var(--bad)"></span>червоний</span> для тих, хто хоче виконати одну задачу, <span class="legend-i" style="color:var(--violet)"><span class="dot" style="background:var(--violet)"></span>фіолетовий</span> для тих, хто хоче залишатися з нами надовго. Частка користувачів лишається «?», доки в нас немає даних по всій базі.',
+ "personas.p":'Складено на основі 15 платних клієнтів. Назви клієнтів приховано (Company A, B…). Цінність — це скільки ці компанії загалом заплатили Warmy.',
  "journey.h":"Карта шляху",
  "journey.p":"Окрема карта для кожної персони. Оберіть персону. Цитати взято з причин скасування та нотаток customer success у HubSpot.",
- "caveat":"<b>Поки що ненадійно.</b> Суми «Заплатили Warmy» у цих вкладках взято з невеликої вибірки: 15 клієнтів, що пішли, по 5 найбільших за виручкою в кожному розмірі компанії. Вони не описують усю клієнтську базу. Сприймайте їх як напрям для перевірки, а не як факти, доки ми не зберемо дані по всіх 535 клієнтах, що пішли, і по активних.",
+ "caveat":"<b>Поки що ненадійно.</b> Суми «Цінність для Warmy» у цих вкладках взято з невеликої вибірки: 15 клієнтів, що пішли, по 5 найбільших за виручкою в кожному розмірі компанії. Вони не описують усю клієнтську базу. Сприймайте їх як напрям для перевірки, а не як факти, доки ми не зберемо дані по всіх 535 клієнтах, що пішли, і по активних.",
  "teams.h":"Що може зробити кожна команда",
  "teams.sub":"Пропозиції для {name} за командами. Редагуйте чи видаляйте будь-яку з них або додайте свою ідею під потрібною командою.",
  "teams.none":"Додайте персону, щоб побачити пропозиції для команд.",
@@ -423,8 +426,8 @@ uk:{
  "hint.nodb":"Карта шляху завантажується зі спільної дошки.",
  "this.persona":"цієї персони","untitled":"Без назви","new.persona":"Нова персона",
  "users":"Кількість користувачів:","users.tip":"Кількість користувачів у цій персоні. Поки невідомо: потрібні дані по всій клієнтській базі.",
- "paid":"Заплатили Warmy:","paid.tip":"Приблизна середня сума, яку кожна компанія цієї персони загалом заплатила Warmy. На основі 15 клієнтів, що пішли, поки ненадійно.",
- "paid.tabtip":"Приблизна середня сума, яку заплатила кожна компанія. Невелика вибірка, поки ненадійно.",
+ "paid":"Цінність для Warmy:","paid.tip":"Приблизна середня сума, яку кожна компанія цієї персони загалом заплатила Warmy. На основі 15 клієнтів, що пішли, поки ненадійно.",
+ "paid.tabtip":"Приблизна середня сума, яку заплатила кожна компанія. Невелика вибірка, поки ненадійно.","paid.tab":"Цінність:",
  "persona.name":"Назва персони","goal":"Мета","churn.h":"Відтік · чернетка","churn.l":"Чому скасовують","churn.ph":"Головні причини, чому перестають платити",
  "oneoff":"Разово","longterm":"Надовго",
  "add.persona":"+ Додати персону","empty.personas":"Персон ще немає. Натисніть «Додати персону», щоб почати карту шляху.",
@@ -472,8 +475,8 @@ const PFIELDS=[
   {id:"role",label:{en:"Persona",uk:"Персона"},ph:{en:"Who they are, job title, company type",uk:"Хто вони: посада, тип компанії"}},
   {id:"size",label:{en:"Size",uk:"Розмір"},ph:{en:"Company size, sending volume",uk:"Розмір компанії, обсяг розсилок"}},
   {id:"sizeShort",label:{en:"Company size · badge",uk:"Розмір компанії · бейдж"},ph:{en:"Short, e.g. 3–19 emp.",uk:"Коротко, напр. 3–19 emp."}},
-  {id:"value",label:{en:"Value to Warmy · badge",uk:"Цінність для Warmy · бейдж"},ph:{en:"What they pay us, e.g. $$ · avg $2.8K",uk:"Скільки платять, напр. $$ · avg $2.8K"}},
-  {id:"paid",label:{en:"Paid Warmy · badge",uk:"Заплатили Warmy · бейдж"},ph:{en:"Approximate average per company, e.g. ≈ $1.2K",uk:"Приблизне середнє на компанію, напр. ≈ $1.2K"}},
+  {id:"value",label:{en:"Value to Warmy · badge",uk:"Рівень цінності ($ / $$ / $$$) · бейдж"},ph:{en:"What they pay us, e.g. $$ · avg $2.8K",uk:"Скільки платять, напр. $$ · avg $2.8K"}},
+  {id:"paid",label:{en:"Paid Warmy · badge",uk:"Цінність для Warmy · бейдж"},ph:{en:"Approximate average per company, e.g. ≈ $1.2K",uk:"Приблизне середнє на компанію, напр. ≈ $1.2K"}},
   {id:"users",label:{en:"Number of users",uk:"Кількість користувачів"},ph:{en:"? Not known yet, e.g. 120",uk:"? Поки невідомо, напр. 120"}},
   {id:"share",label:{en:"Share of our users",uk:"Частка наших користувачів"},ph:{en:"? Not known yet, e.g. 40% or 1,200 accounts",uk:"? Поки невідомо, напр. 40% або 1 200 акаунтів"}},
   {id:"segment",label:{en:"Segment",uk:"Сегмент"},ph:{en:"B2B or B2C, type of email",uk:"B2B чи B2C, тип листів"}},
@@ -634,7 +637,7 @@ function tabIntent(p){return p.intent==="one-off"?t("oneoff"):p.intent==="long-t
 function paintTab(b,p){
   b.querySelector(".nm").textContent=tabLabel(p);
   const it=b.querySelector(".t-intent");it.className="t-intent "+(p.intent||"");it.textContent=tabIntent(p);
-  b.querySelector(".t-paid b").textContent=tabField(p,"paid")||"?";
+  b.querySelector(".t-paid b").textContent=(tabField(p,"paid")||"?").replace(/^≈\s*/,"");
 }
 function renderTabs(labelsOnly){
   const tabs=$("#tabs");
@@ -642,7 +645,7 @@ function renderTabs(labelsOnly){
   tabs.innerHTML="";
   personas.forEach(p=>{const b=document.createElement("button");b.type="button";b.className="tab";b.setAttribute("role","tab");b.dataset.id=p.id;
     b.setAttribute("aria-selected",p.id===current);
-    b.innerHTML=`<span class="nm"></span><span class="t-intent"></span><span class="t-paid" title="${t("paid.tabtip")}">${t("paid")} <b></b></span>`;
+    b.innerHTML=`<span class="nm"></span><span class="t-intent"></span><span class="t-paid" title="${t("paid.tabtip")}">${t("paid.tab")} <b></b></span>`;
     paintTab(b,p);
     b.onclick=()=>{current=p.id;renderTabs();renderGrid()};tabs.appendChild(b)});
 }
