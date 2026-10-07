@@ -70,7 +70,7 @@ h1{margin:0;font-size:clamp(30px,4.6vw,46px);font-weight:700;letter-spacing:-.02
 .sec-h p{margin:4px 0 0;color:var(--muted);max-width:62ch}
 
 /* personas */
-.personas{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:start}
+.personas{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:stretch}
 @media (max-width:1100px){.personas{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:640px){.personas{grid-template-columns:minmax(0,1fr)}}
 .pcard{padding:16px}
@@ -677,7 +677,7 @@ function renderTeams(){
   if(!p)return;
   TEAMS.forEach(tm=>{
     const col=document.createElement("div");col.className="team";col.dataset.team=tm.id;
-    col.innerHTML=`<div class="team-h"><b><span class="dot" style="background:${tm.c}"></span>${N(tm.name)}</b><span class="stage-chip">${N(tm.stage)}</span><small>${N(tm.note)}</small></div><ul class="ideas"></ul>
+    col.innerHTML=`<div class="team-h"><b><span class="dot" style="background:${tm.c}"></span>${N(tm.name)}</b><small>${N(tm.note)}</small></div><ul class="ideas"></ul>
       <div class="add"><label for="add-${tm.id}">${t("add.idea.l")}</label><textarea id="add-${tm.id}" rows="2" placeholder="${t("add.idea.ph",{team:N(tm.name)})}"></textarea><button class="btn primary" type="button" disabled>${t("add.idea.btn")}</button></div>`;
     const ta=col.querySelector(".add textarea"),btn=col.querySelector(".add .btn");
     ta.addEventListener("input",()=>{btn.disabled=!ta.value.trim()});
