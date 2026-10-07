@@ -1,8 +1,8 @@
 # Who We Build Warmy For
 
-Warmy's working customer journey map: four personas, where and why they churn, and what Marketing, Sales, Customer Success and Development can do about it. Anyone on the team can edit boxes, add ideas and add personas. English and Ukrainian.
+## 👉 [Open the page: olenab-byte.github.io/for-team](https://olenab-byte.github.io/for-team/)
 
-**Page:** https://olenab-byte.github.io/for-team/
+Warmy's working customer journey map: four personas, where and why they churn, and what Marketing, Sales, Customer Success and Development can do about it. Anyone on the team can edit boxes, add ideas and add personas. English and Ukrainian.
 
 Client names are anonymised (Company A, B…). Figures come from a small sample of 15 churned accounts and are not reliable yet.
 
